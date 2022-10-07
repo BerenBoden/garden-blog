@@ -1,0 +1,23 @@
+[
+	{
+		"id": 1,
+		"img": "author.jpg",
+		"title": "Steven",
+		"author": "Steven",
+		"desc": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi eius fugit saepe debitis labore beatae est facilis culpa ratione eos quos, reiciendis et necessitatibus sint ea eveniet aliquid in nam minus, praesentium expedita sit distinctio, pariatur cum. Corrupti, iusto consequuntur?"
+	},
+	{
+		"id": 2,
+		"img": "author.jpg",
+		"title": "Steven",
+		"author": "Steven",
+		"desc": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi eius fugit saepe debitis labore beatae est facilis culpa ratione eos quos, reiciendis et necessitatibus sint ea eveniet aliquid in nam minus, praesentium expedita sit distinctio, pariatur cum. Corrupti, iusto consequuntur?"
+	},
+	{
+		"id": 3,
+		"img": "author.jpg",
+		"title": "Steven",
+		"author": "Steven",
+		"desc": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi eius fugit saepe debitis labore beatae est facilis culpa ratione eos quos, reiciendis et necessitatibus sint ea eveniet aliquid in nam minus, praesentium expedita sit distinctio, pariatur cum. Corrupti, iusto consequuntur?"
+	}
+]
