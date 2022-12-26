@@ -5,7 +5,7 @@ import Layout from "../../components/layout/layout";
 import data from "../../data/author.json";
 import post from "../../data/post.json";
 function Author() {
-
+    const [singleData, setSingleData] = useState([])
     let Router = useRouter()
 
     const { id } = Router.query;
