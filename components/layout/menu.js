@@ -39,11 +39,6 @@ const Menu = ({ addClass }) => {
                                         </a>
                                     </Link>
                                 </li>
-                                <li>
-                                    <Link href="/forum">
-                                        <a>Forum</a>
-                                    </Link>
-                                </li>
                                 <li className="current-item has-mega-menu">
                                     <Link href="/articles">
                                         <a>Articles</a>
@@ -200,18 +195,18 @@ const Menu = ({ addClass }) => {
                                     </ul>
                                 </li>
                                 <li>
+                                    <Link href="/forum">
+                                        <a>Shop</a>
+                                    </Link>
+                                </li>
+                                <li>
                                     <Link href="/courses">
                                         <a>Courses</a>
                                     </Link>
                                 </li>
                                 <li>
                                     <Link href="/contact">
-                                        <a>Contact</a>
-                                    </Link>
-                                </li>
-                                <li>
-                                    <Link href="/about">
-                                        <a>About us</a>
+                                        <a>About</a>
                                     </Link>
                                 </li>
                             </ul>
@@ -221,7 +216,6 @@ const Menu = ({ addClass }) => {
                                     <span className="menu-icon mr-10">
                                         <span className="menu-icon-inner"></span>
                                     </span>
-                                    Main Menu
                                 </button>
                                 <NavMenu isToggled={isToggled} />
                             </div>

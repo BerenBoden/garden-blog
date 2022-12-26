@@ -14,9 +14,9 @@ const NavMenu = ({ isToggled }) => {
                 <PerfectScrollbar>
                     <ul className="metismenu text-muted" id="metismenu">
                         <li>
-                            <a href="#" aria-expanded="false">
+                            <Link href="/" aria-expanded="false">
                                 Home
-                            </a>
+                            </Link>
                         </li>
                         <li>
                             <a className="has-arrow" href="#" aria-expanded="false">
@@ -25,42 +25,42 @@ const NavMenu = ({ isToggled }) => {
                             <ul>
                                 <li>
                                     <Link href="/about">
-                                        <a>About</a>
+                                        About
                                     </Link>
                                 </li>
                                 <li>
                                     <Link href="/contact">
-                                        <a>Contact</a>
+                                        Contact
                                     </Link>
                                 </li>
                                 <li>
                                     <Link href="/page-typography">
-                                        <a>Typography</a>
+                                        Typography
                                     </Link>
                                 </li>
                                 <li>
                                     <Link href="/page-register">
-                                        <a>Register</a>
+                                        Register
                                     </Link>
                                 </li>
                                 <li>
                                     <Link href="/page-login">
-                                        <a>Login</a>
+                                        Login
                                     </Link>
                                 </li>
                                 <li>
                                     <Link href="/page-search">
-                                        <a>Search</a>
+                                        Search
                                     </Link>
                                 </li>
                                 <li>
                                     <Link href="/page-author">
-                                        <a>Author</a>
+                                        Author
                                     </Link>
                                 </li>
                                 <li>
                                     <Link href="/page-404">
-                                        <a>404 page</a>
+                                        404 page
                                     </Link>
                                 </li>
                             </ul>
@@ -72,22 +72,22 @@ const NavMenu = ({ isToggled }) => {
                             <ul>
                                 <li>
                                     <Link href="/category-list">
-                                        <a>List layout</a>
+                                        List layout
                                     </Link>
                                 </li>
                                 <li>
                                     <Link href="/category-grid">
-                                        <a>Grid layout</a>
+                                        Grid layout
                                     </Link>
                                 </li>
                                 <li>
                                     <Link href="/category-masonry">
-                                        <a>Masonry layout</a>
+                                        Masonry layout
                                     </Link>
                                 </li>
                                 <li>
                                     <Link href="/category-big">
-                                        <a>Big layout</a>
+                                        Big layout
                                     </Link>
                                 </li>
                             </ul>
@@ -99,22 +99,22 @@ const NavMenu = ({ isToggled }) => {
                             <ul>
                                 <li>
                                     <Link href="/single">
-                                        <a>Default</a>
+                                        Default
                                     </Link>
                                 </li>
                                 <li>
                                     <Link href="/single-2">
-                                        <a>Big image</a>
+                                        Big image
                                     </Link>
                                 </li>
                                 <li>
                                     <Link href="/single-3">
-                                        <a>Left image</a>
+                                        Left image
                                     </Link>
                                 </li>
                                 <li>
                                     <Link href="/single-4">
-                                        <a>With sidebar</a>
+                                        With sidebar
                                     </Link>
                                 </li>
                             </ul>

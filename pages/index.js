@@ -3,7 +3,9 @@ import Layout from "./../components/layout/layout";
 import PostCarousel1 from "./../components/slider/PostCarousel1";
 import post from "../data/post.json";
 import author from "../data/author.json";
+import {process} from '../utils/slugify'
 function Home() {
+
     return (
         <>
             <Layout>
@@ -43,6 +45,7 @@ function Home() {
                                     <img
                                         src="/assets/imgs/authors/featured.png"
                                         alt=""
+                                        href="#"
                                     />
                                 </div>
                             </div>
@@ -77,10 +80,9 @@ function Home() {
                                                     backgroundImage: `url(assets/imgs/news/${item.img})`
                                                 }}
                                             >
-                                                <Link href={`/blog/${item.id}`}>
-                                                    <a
-                                                        className="img-link"
-                                                    ></a>
+                                                <Link className="img-link" href={`/blog/${process(item.title)}`}>
+                                    
+                                                    <a href="#">Link</a>
                                                 </Link>
                                                 <span className="top-right-icon bg-success">
                                                     <i className="elegant-icon icon_camera_alt"></i>
@@ -140,9 +142,9 @@ function Home() {
                                                 </div>
                                                 <div className="d-flex post-card-content">
                                                     <h5 className="post-title mb-20 font-weight-900">
-                                                        <Link href={`/blog/${item.id}`}>
+                                                        <Link href={`/blog/${process(item.title)}`}>
                                                             <a>
-                                                                {item.title}
+                                                                1
                                                             </a>
                                                         </Link>
                                                     </h5>
@@ -189,7 +191,7 @@ function Home() {
                                                                     backgroundImage: `url(assets/imgs/news/${item.img})`
                                                                 }}
                                                             >
-                                                                <Link href={`/blog/${item.id}`}>
+                                                                <Link href={`/blog/${process(item.title)}`}>
                                                                     <a
                                                                         className="img-link"
                                                                     ></a>
@@ -249,9 +251,9 @@ function Home() {
                                                                 </div>
                                                                 <div className="d-flex post-card-content">
                                                                     <h5 className="post-title mb-20 font-weight-900">
-                                                                        <Link href={`/blog/${item.id}`}>
+                                                                        <Link href={`/blog/${process(item.title)}`}>
                                                                             <a>
-                                                                                {item.title}
+                                                                                4
                                                                             </a>
                                                                         </Link>
                                                                     </h5>
@@ -296,7 +298,7 @@ function Home() {
                                                                     className="img-hover-slide border-radius-5 position-relative"
                                                                     style={{ backgroundImage: `url(assets/imgs/news/${item.img})` }}
                                                                 >
-                                                                    <Link href={`/blog/${item.id}`}>
+                                                                    <Link href={`/blog/${process(item.title)}`}>
                                                                         <a
                                                                             className="img-link"
                                                                         ></a>
@@ -358,9 +360,9 @@ function Home() {
                                                                     </Link>
                                                                 </div>
                                                                 <h5 className="post-title font-weight-900 mb-20">
-                                                                    <Link href={`/blog/${item.id}`}>
+                                                                    <Link href={`/blog/${process(item.title)}`}>
                                                                         <a>
-                                                                            {item.title}
+                                                                            3
                                                                         </a>
                                                                     </Link>
                                                                     <span className="post-format-icon">
@@ -520,9 +522,9 @@ function Home() {
                                                             <div className="d-flex bg-white has-border p-25 hover-up transition-normal border-radius-5">
                                                                 <div className="post-content media-body">
                                                                     <h6 className="post-title mb-15 text-limit-2-row font-medium">
-                                                                        <Link href={`/blog/${item.id}`}>
+                                                                        <Link href={`/blog/${process(item.title)}`}>
                                                                             <a>
-                                                                                {item.title}
+                                                                                2
                                                                             </a>
                                                                         </Link>
                                                                     </h6>
@@ -536,7 +538,7 @@ function Home() {
                                                                     </div>
                                                                 </div>
                                                                 <div className="post-thumb post-thumb-80 d-flex ml-15 border-radius-5 img-hover-scale overflow-hidden">
-                                                                    <Link href={`/blog/${item.id}`}>
+                                                                    <Link href={`/blog/${process(item.title)}`}>
                                                                         <a
                                                                             className="color-white"
 
@@ -580,7 +582,7 @@ function Home() {
                                                             <div className="post-content media-body">
                                                                 <p className="mb-10">
                                                                     <Link href="/author">
-                                                                        <a>
+                                                                        <a href="/author">
                                                                             <strong>
                                                                                 David
                                                                             </strong>

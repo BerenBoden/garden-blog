@@ -26,7 +26,7 @@ function CaregoryList() {
                         <div className="container">
                             <h2 className="font-weight-900">{category}</h2>
                             <div className="breadcrumb">
-                                <Link href="/">
+                                <Link legacyBehavior href="/">
                                     <a rel="nofollow">
                                         Home
                                     </a>
@@ -51,7 +51,7 @@ function CaregoryList() {
                                                                     className="img-hover-slide border-radius-5 position-relative"
                                                                     style={{ backgroundImage: `url(/assets/imgs/news/${item.img})` }}
                                                                 >
-                                                                    <Link href={`/blog/${item.id}`}>
+                                                                    <Link legacyBehavior  href={`/blog/${item.id}`}>
                                                                         <a
                                                                             className="img-link"
                                                                         ></a>
@@ -59,14 +59,14 @@ function CaregoryList() {
                                                                 </div>
                                                                 <ul className="social-share">
                                                                     <li>
-                                                                        <Link href="/#">
+                                                                        <Link legacyBehavior  href="/#">
                                                                             <a>
                                                                                 <i className="elegant-icon social_share"></i>
                                                                             </a>
                                                                         </Link>
                                                                     </li>
                                                                     <li>
-                                                                        <Link href="/#">
+                                                                        <Link legacyBehavior  href="/#">
                                                                             <a
                                                                                 className="fb"
                                                                                 title="Share on Facebook"
@@ -77,7 +77,7 @@ function CaregoryList() {
                                                                         </Link>
                                                                     </li>
                                                                     <li>
-                                                                        <Link href="/#">
+                                                                        <Link legacyBehavior  href="/#">
                                                                             <a
                                                                                 className="tw"
                                                                                 target="_blank"
@@ -88,7 +88,7 @@ function CaregoryList() {
                                                                         </Link>
                                                                     </li>
                                                                     <li>
-                                                                        <Link href="/#">
+                                                                        <Link legacyBehavior  href="/#">
                                                                             <a
                                                                                 className="pt"
                                                                                 target="_blank"
@@ -104,7 +104,7 @@ function CaregoryList() {
                                                         <div className="col-md-8 align-self-center">
                                                             <div className="post-content">
                                                                 <div className="entry-meta meta-0 font-small mb-10">
-                                                                    <Link href={`/category/${item.category}`}>
+                                                                    <Link legacyBehavior  href={`/category/${item.category}`}>
                                                                         <a>
                                                                             <span className="post-cat text-primary">
                                                                                 {item.category}
@@ -113,7 +113,7 @@ function CaregoryList() {
                                                                     </Link>
                                                                 </div>
                                                                 <h5 className="post-title font-weight-900 mb-20">
-                                                                    <Link href={`/blog/${item.id}`}>
+                                                                    <Link legacyBehavior  href={`/blog/${item.id}`}>
                                                                         <a>
                                                                             {item.title}
                                                                         </a>
@@ -144,7 +144,7 @@ function CaregoryList() {
                                         <nav aria-label="Page navigation example">
                                             <ul className="pagination justify-content-start">
                                                 <li className="page-item">
-                                                    <Link href="/#">
+                                                    <Link legacyBehavior  href="/#">
                                                         <a
                                                             className="page-link"
                                                         >
@@ -153,7 +153,7 @@ function CaregoryList() {
                                                     </Link>
                                                 </li>
                                                 <li className="page-item active">
-                                                    <Link href="/#">
+                                                    <Link legacyBehavior  href="/#">
                                                         <a
                                                             className="page-link"
                                                         >
@@ -162,7 +162,7 @@ function CaregoryList() {
                                                     </Link>
                                                 </li>
                                                 <li className="page-item">
-                                                    <Link href="/#">
+                                                    <Link legacyBehavior  href="/#">
                                                         <a
                                                             className="page-link"
                                                         >
@@ -171,7 +171,7 @@ function CaregoryList() {
                                                     </Link>
                                                 </li>
                                                 <li className="page-item">
-                                                    <Link href="/#">
+                                                    <Link legacyBehavior  href="/#">
                                                         <a
                                                             className="page-link"
                                                         >
@@ -180,7 +180,7 @@ function CaregoryList() {
                                                     </Link>
                                                 </li>
                                                 <li className="page-item">
-                                                    <Link href="/#">
+                                                    <Link legacyBehavior  href="/#">
                                                         <a
                                                             className="page-link"
                                                         >
@@ -189,7 +189,7 @@ function CaregoryList() {
                                                     </Link>
                                                 </li>
                                                 <li className="page-item">
-                                                    <Link href="/#">
+                                                    <Link legacyBehavior  href="/#">
                                                         <a
                                                             className="page-link"
                                                         >
@@ -224,7 +224,7 @@ function CaregoryList() {
                                             <strong>Follow me: </strong>
                                             <ul className="header-social-network d-inline-block list-inline color-white mb-20">
                                                 <li className="list-inline-item">
-                                                    <Link href="/#">
+                                                    <Link legacyBehavior  href="/#">
                                                         <a
                                                             className="fb"
                                                             target="_blank"
@@ -235,7 +235,7 @@ function CaregoryList() {
                                                     </Link>
                                                 </li>
                                                 <li className="list-inline-item">
-                                                    <Link href="/#">
+                                                    <Link legacyBehavior  href="/#">
                                                         <a
                                                             className="tw"
                                                             target="_blank"
@@ -246,7 +246,7 @@ function CaregoryList() {
                                                     </Link>
                                                 </li>
                                                 <li className="list-inline-item">
-                                                    <Link href="/#">
+                                                    <Link legacyBehavior  href="/#">
                                                         <a
                                                             className="pt"
                                                             target="_blank"
@@ -270,7 +270,7 @@ function CaregoryList() {
                                                         <div className="d-flex bg-white has-border p-25 hover-up transition-normal border-radius-5">
                                                             <div className="post-content media-body">
                                                                 <h6 className="post-title mb-15 text-limit-2-row font-medium">
-                                                                    <Link href="/#">
+                                                                    <Link legacyBehavior  href="/#">
                                                                         <a href="/single">
                                                                             Spending
                                                                             Some
@@ -295,7 +295,7 @@ function CaregoryList() {
                                                                 </div>
                                                             </div>
                                                             <div className="post-thumb post-thumb-80 d-flex ml-15 border-radius-5 img-hover-scale overflow-hidden">
-                                                                <Link href="/#">
+                                                                <Link legacyBehavior  href="/#">
                                                                     <a
                                                                         className="color-white"
                                                                     >
@@ -312,7 +312,7 @@ function CaregoryList() {
                                                         <div className="d-flex bg-white has-border p-25 hover-up transition-normal border-radius-5">
                                                             <div className="post-content media-body">
                                                                 <h6 className="post-title mb-15 text-limit-2-row font-medium">
-                                                                    <Link href="/#">
+                                                                    <Link legacyBehavior  href="/#">
                                                                         <a href="/single">
                                                                             Relationship
                                                                             Podcasts
@@ -334,7 +334,7 @@ function CaregoryList() {
                                                                 </div>
                                                             </div>
                                                             <div className="post-thumb post-thumb-80 d-flex ml-15 border-radius-5 img-hover-scale overflow-hidden">
-                                                                <Link href="/#">
+                                                                <Link legacyBehavior  href="/#">
                                                                     <a
                                                                         className="color-white"
                                                                     >
@@ -351,7 +351,7 @@ function CaregoryList() {
                                                         <div className="d-flex bg-white has-border p-25 hover-up transition-normal border-radius-5">
                                                             <div className="post-content media-body">
                                                                 <h6 className="post-title mb-15 text-limit-2-row font-medium">
-                                                                    <Link href="/#">
+                                                                    <Link legacyBehavior  href="/#">
                                                                         <a href="/single">
                                                                             Here’s
                                                                             How
@@ -377,7 +377,7 @@ function CaregoryList() {
                                                                 </div>
                                                             </div>
                                                             <div className="post-thumb post-thumb-80 d-flex ml-15 border-radius-5 img-hover-scale overflow-hidden">
-                                                                <Link href="/#">
+                                                                <Link legacyBehavior  href="/#">
                                                                     <a
                                                                         className="color-white"
                                                                     >
@@ -394,7 +394,7 @@ function CaregoryList() {
                                                         <div className="d-flex bg-white has-border p-25 hover-up transition-normal border-radius-5">
                                                             <div className="post-content media-body">
                                                                 <h6 className="post-title mb-15 text-limit-2-row font-medium">
-                                                                    <Link href="/#">
+                                                                    <Link legacyBehavior  href="/#">
                                                                         <a href="/single">
                                                                             America’s
                                                                             Governors
@@ -421,7 +421,7 @@ function CaregoryList() {
                                                                 </div>
                                                             </div>
                                                             <div className="post-thumb post-thumb-80 d-flex ml-15 border-radius-5 img-hover-scale overflow-hidden">
-                                                                <Link href="/#">
+                                                                <Link legacyBehavior  href="/#">
                                                                     <a
                                                                         className="color-white"
                                                                     >
@@ -447,7 +447,7 @@ function CaregoryList() {
                                             <div className="instagram-gellay">
                                                 <ul className="insta-feed">
                                                     <li>
-                                                        <Link href="/#">
+                                                        <Link legacyBehavior  href="/#">
                                                             <a
                                                                 href="/assets/imgs/thumbnail-3.jpg"
                                                                 className="play-video"
@@ -464,7 +464,7 @@ function CaregoryList() {
                                                         </Link>
                                                     </li>
                                                     <li>
-                                                        <Link href="/#">
+                                                        <Link legacyBehavior  href="/#">
                                                             <a
                                                                 href="/assets/imgs/thumbnail-4.jpg"
                                                                 className="play-video"
@@ -481,7 +481,7 @@ function CaregoryList() {
                                                         </Link>
                                                     </li>
                                                     <li>
-                                                        <Link href="/#">
+                                                        <Link legacyBehavior  href="/#">
                                                             <a
                                                                 href="/assets/imgs/thumbnail-5.jpg"
                                                                 className="play-video"
@@ -498,7 +498,7 @@ function CaregoryList() {
                                                         </Link>
                                                     </li>
                                                     <li>
-                                                        <Link href="/#">
+                                                        <Link legacyBehavior  href="/#">
                                                             <a
                                                                 href="/assets/imgs/thumbnail-3.jpg"
                                                                 className="play-video"
@@ -515,7 +515,7 @@ function CaregoryList() {
                                                         </Link>
                                                     </li>
                                                     <li>
-                                                        <Link href="/#">
+                                                        <Link legacyBehavior  href="/#">
                                                             <a
                                                                 href="/assets/imgs/thumbnail-4.jpg"
                                                                 className="play-video"
@@ -532,7 +532,7 @@ function CaregoryList() {
                                                         </Link>
                                                     </li>
                                                     <li>
-                                                        <Link href="/#">
+                                                        <Link legacyBehavior  href="/#">
                                                             <a
                                                                 href="/assets/imgs/thumbnail-5.jpg"
                                                                 className="play-video"

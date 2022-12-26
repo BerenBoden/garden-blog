@@ -1,24 +1,395 @@
 import Link from "next/link";
-import data from "../data/post.json";
-const Blog = () => {
-    console.log(data);
-    return (
-        <>
+import Image from "next/image";
+import { useState, useEffect } from "react";
+import { process } from "../utils/slugify";
+import axios from "axios";
+import Layout from "./../components/layout/layout";
 
+function CaregoryList() {
+  const [posts, setPosts] = useState([]);
 
-            {data.map((item, i) => (
-                <div className="col-lg-4 col-sm-4" key={i}>
-                    <Link href={`/blog/${item.id}`}>
-                        <a>
-                            <img className="img-fluid" src={`/images/blog/${item.img}`} alt="" />
+  useEffect(() => {
+    async function fetchData() {
+      const result = await axios("http://localhost:1337/api/products?fields=title&populate=images");
+      setPosts(
+        result.data.data.map((item, i) => ({
 
-                            <h4>{item.title}</h4>
-                        </a>
-                    </Link>
+          ...item.attributes,
+          image:
+          `${result.data.data[i].attributes.images.data[i].attributes.formats.thumbnail.url.split('/uploads')[1]}`,
+        }))
+      );
+    }
+    fetchData();
+  }, []);
+
+  return (
+    <>
+      <Layout>
+        <main>
+          <div className="archive-header pt-50">
+            <div className="container">
+              <h2 className="font-weight-900">Healthy</h2>
+              <div className="breadcrumb">
+                <Link href="/">
+                  <a rel="nofollow">Home</a>
+                </Link>
+                <span></span> Healthy
+              </div>
+              <div className="bt-1 border-color-1 mt-30 mb-50"></div>
+            </div>
+          </div>
+          <div className="pb-50">
+            <div className="container">
+              <div className="row">
+                <div className="col-lg-8">
+                  <div className="post-module-3">
+                    <div className="loop-list loop-list-style-1">
+                      {posts.map((post, i) => (
+                        <article className="hover-up-2 transition-normal wow fadeInUp animated">
+                          <div className="row mb-40 list-style-2">
+                            <div className="col-md-4">
+                              <div className="post-thumb position-relative border-radius-5">
+                                <div
+                                  className="img-hover-slide border-radius-5 position-relative"
+                                  style={{
+                                    backgroundImage: `url(assets/imgs/news/${""})`,
+                                  }}
+                                >
+                                  <Link href={`/blog/${process(post.title)}`}>
+                                    <a className="img-link"><Image
+                                        height={500}
+                                        width={500}
+                                        src={`http://localhost:1337/uploads${post.image}`}
+                                        alt="kk"
+                                      /></a>
+                                  </Link>
+                                </div>
+                                <ul className="social-share">
+                                  <li>
+                                    <Link href="/#">
+                                      <a>
+                                        <i className="elegant-icon social_share"></i>
+                                      </a>
+                                    </Link>
+                                  </li>
+                                  <li>
+                                    <Link href="/#">
+                                      <a
+                                        className="fb"
+                                        title="Share on Facebook"
+                                        target="_blank"
+                                      >
+                                        <i className="elegant-icon social_facebook"></i>
+                                      </a>
+                                    </Link>
+                                  </li>
+                                  <li>
+                                    <Link href="/#">
+                                      <a
+                                        className="tw"
+                                        target="_blank"
+                                        title="Tweet now"
+                                      >
+                                        <i className="elegant-icon social_twitter"></i>
+                                      </a>
+                                    </Link>
+                                  </li>
+                                  <li>
+                                    <Link href="/#">
+                                      <a
+                                        className="pt"
+                                        target="_blank"
+                                        title="Pin it"
+                                      >
+                                        <i className="elegant-icon social_pinterest"></i>
+                                      </a>
+                                    </Link>
+                                  </li>
+                                </ul>
+                              </div>
+                            </div>
+                            <div className="col-md-8 align-self-center">
+                              <div className="post-content">
+                                <div className="entry-meta meta-0 font-small mb-10">
+                                  <Link
+                                    href={`/category/${process(post.title)}`}
+                                  >
+                                    <a>
+                                      <span className="post-cat text-primary">
+                                        {post.title}
+                                      </span>
+                                    </a>
+                                  </Link>
+                                </div>
+                                <h5 className="post-title font-weight-900 mb-20">
+                                  <Link href={`/blog/${process(post.title)}`}>
+                                    <a>{post.description}</a>
+                                  </Link>
+                                  <span className="post-format-icon">
+                                    <i className="elegant-icon icon_star_alt"></i>
+                                  </span>
+                                </h5>
+                                <div className="entry-meta meta-1 float-left font-x-small text-uppercase">
+                                  <span className="post-on">{}</span>
+                                  <span className="time-reading has-dot">
+                                    {"3"} mins read
+                                  </span>
+                                  <span className="post-by has-dot">
+                                    {"3"} views
+                                  </span>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </article>
+                      ))}
+                    </div>
+                  </div>
+                  <div className="pagination-area mb-30 wow fadeInUp animated">
+                    <nav aria-label="Page navigation example">
+                      <ul className="pagination justify-content-start">
+                        <li className="page-item">
+                          <Link href="/#">
+                            <a className="page-link">
+                              <i className="elegant-icon arrow_left"></i>
+                            </a>
+                          </Link>
+                        </li>
+                        <li className="page-item active">
+                          <Link href="/#">
+                            <a className="page-link">01</a>
+                          </Link>
+                        </li>
+                        <li className="page-item">
+                          <Link href="/#">
+                            <a className="page-link">02</a>
+                          </Link>
+                        </li>
+                        <li className="page-item">
+                          <Link href="/#">
+                            <a className="page-link">03</a>
+                          </Link>
+                        </li>
+                        <li className="page-item">
+                          <Link href="/#">
+                            <a className="page-link">04</a>
+                          </Link>
+                        </li>
+                        <li className="page-item">
+                          <Link href="/#">
+                            <a className="page-link">
+                              <i className="elegant-icon arrow_right"></i>
+                            </a>
+                          </Link>
+                        </li>
+                      </ul>
+                    </nav>
+                  </div>
                 </div>
-            ))}
-        </>
-    );
-};
+                <div className="col-lg-4">
+                  <div className="widget-area">
+                    <div className="sidebar-widget widget-about mb-50 pt-30 pr-30 pb-30 pl-30 bg-white border-radius-5 has-border  wow fadeInUp animated">
+                      <img
+                        className="about-author-img mb-25"
+                        src="/assets/imgs/authors/author.jpg"
+                        alt=""
+                      />
+                      <h5 className="mb-20">Hello, I'm Steven</h5>
+                      <p className="font-medium text-muted">
+                        Hi, I’m Stenven, a Florida native, who left my career in
+                        corporate wealth management six years ago to embark on a
+                        summer of soul searching that would change the course of
+                        my life forever.
+                      </p>
+                      <strong>Follow me: </strong>
+                      <ul className="header-social-network d-inline-block list-inline color-white mb-20">
+                        <li className="list-inline-item">
+                          <Link href="/#">
+                            <a className="fb" target="_blank" title="Facebook">
+                              <i className="elegant-icon social_facebook"></i>
+                            </a>
+                          </Link>
+                        </li>
+                        <li className="list-inline-item">
+                          <Link href="/#">
+                            <a className="tw" target="_blank" title="Tweet now">
+                              <i className="elegant-icon social_twitter"></i>
+                            </a>
+                          </Link>
+                        </li>
+                        <li className="list-inline-item">
+                          <Link href="/#">
+                            <a className="pt" target="_blank" title="Pin it">
+                              <i className="elegant-icon social_pinterest"></i>
+                            </a>
+                          </Link>
+                        </li>
+                      </ul>
+                    </div>
+                    <div className="sidebar-widget widget-latest-posts mb-50 wow fadeInUp animated">
+                      <div className="widget-header-1 position-relative mb-30">
+                        <h5 className="mt-5 mb-30">Most popular</h5>
+                      </div>
+                      <div className="post-block-list post-module-1">
+                        <ul className="list-post">
+                          {posts.slice(0, 3).map((post, i) => (
+                            
+                            <li className="mb-30 wow fadeInUp animated">
+                              <div className="d-flex bg-white has-border p-25 hover-up transition-normal border-radius-5">
+                                <div className="post-content media-body">
+                                  <h6 className="post-title mb-15 text-limit-2-row font-medium">
+                                    <Link href={`/blog/${process(post.title)}`}>
+                                      <a>{post.title}</a>
+                                    </Link>
+                                  </h6>
+                                  <div className="entry-meta meta-1 float-left font-x-small text-uppercase">
+                                    <span className="post-on">{}</span>
+                                    <span className="post-by has-dot">
+                                      {} views
+                                    </span>
+                                  </div>
+                                </div>
+                                <div className="post-thumb post-thumb-80 d-flex ml-15 border-radius-5 img-hover-scale overflow-hidden">
+                                {console.log(`http://localhost:1337/uploads${post.image}`)}
+                                  <Link href={`/blog/${""}`}>
+                                    <a className="color-white">
+                                
+                                      <Image
+                                        height={500}
+                                        width={500}
+                                        src={`http://localhost:1337/uploads${post.image}`}
+                                        alt="kk"
+                                      />
+                                    </a>
+                                  </Link>
+                                </div>
+                              </div>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    </div>
 
-export default Blog;
+                    <div className="sidebar-widget widget_instagram wow fadeInUp animated">
+                      <div className="widget-header-1 position-relative mb-30">
+                        <h5 className="mt-5 mb-30">Instagram</h5>
+                      </div>
+                      <div className="instagram-gellay">
+                        <ul className="insta-feed">
+                          <li>
+                            <Link href="/#">
+                              <a
+                                href="/assets/imgs/thumbnail-3.jpg"
+                                className="play-video"
+                                data-animate="zoomIn"
+                                data-duration="1.5s"
+                                data-delay="0.1s"
+                              >
+                                <img
+                                  className="border-radius-5"
+                                  src="/assets/imgs/news/thumb-1.jpg"
+                                  alt=""
+                                />
+                              </a>
+                            </Link>
+                          </li>
+                          <li>
+                            <Link href="/#">
+                              <a
+                                href="/assets/imgs/thumbnail-4.jpg"
+                                className="play-video"
+                                data-animate="zoomIn"
+                                data-duration="1.5s"
+                                data-delay="0.1s"
+                              >
+                                <img
+                                  className="border-radius-5"
+                                  src="/assets/imgs/news/thumb-2.jpg"
+                                  alt=""
+                                />
+                              </a>
+                            </Link>
+                          </li>
+                          <li>
+                            <Link href="/#">
+                              <a
+                                href="/assets/imgs/thumbnail-5.jpg"
+                                className="play-video"
+                                data-animate="zoomIn"
+                                data-duration="1.5s"
+                                data-delay="0.1s"
+                              >
+                                <img
+                                  className="border-radius-5"
+                                  src="/assets/imgs/news/thumb-3.jpg"
+                                  alt=""
+                                />
+                              </a>
+                            </Link>
+                          </li>
+                          <li>
+                            <Link href="/#">
+                              <a
+                                href="/assets/imgs/thumbnail-3.jpg"
+                                className="play-video"
+                                data-animate="zoomIn"
+                                data-duration="1.5s"
+                                data-delay="0.1s"
+                              >
+                                <img
+                                  className="border-radius-5"
+                                  src="/assets/imgs/news/thumb-4.jpg"
+                                  alt=""
+                                />
+                              </a>
+                            </Link>
+                          </li>
+                          <li>
+                            <Link href="/#">
+                              <a
+                                href="/assets/imgs/thumbnail-4.jpg"
+                                className="play-video"
+                                data-animate="zoomIn"
+                                data-duration="1.5s"
+                                data-delay="0.1s"
+                              >
+                                <img
+                                  className="border-radius-5"
+                                  src="/assets/imgs/news/thumb-5.jpg"
+                                  alt=""
+                                />
+                              </a>
+                            </Link>
+                          </li>
+                          <li>
+                            <Link href="/#">
+                              <a
+                                href="/assets/imgs/thumbnail-5.jpg"
+                                className="play-video"
+                                data-animate="zoomIn"
+                                data-duration="1.5s"
+                                data-delay="0.1s"
+                              >
+                                <img
+                                  className="border-radius-5"
+                                  src="/assets/imgs/news/thumb-6.jpg"
+                                  alt=""
+                                />
+                              </a>
+                            </Link>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </main>
+      </Layout>
+    </>
+  );
+}
+export default CaregoryList;

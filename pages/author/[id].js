@@ -8,11 +8,6 @@ function Author() {
 
     let Router = useRouter()
 
-    const [singleData, setSingleData] = useState(null);
-
-    console.log(singleData);
-
-
     const { id } = Router.query;
 
     useEffect(() => {
@@ -119,7 +114,7 @@ function Author() {
                                                                 backgroundImage: `url(/assets/imgs/news/${item.img})`
                                                             }}
                                                         >
-                                                            <Link href={`/blog/${item.id}`}>
+                                                            <Link legacyBehavior  href={`/blog/${item.id}`}>
                                                                 <a
                                                                     className="img-link"
                                                                 ></a>
@@ -129,14 +124,14 @@ function Author() {
                                                             </span>
                                                             <ul className="social-share">
                                                                 <li>
-                                                                    <Link href="#">
+                                                                    <Link legacyBehavior  href="#">
                                                                         <a>
                                                                             <i className="elegant-icon social_share"></i>
                                                                         </a>
                                                                     </Link>
                                                                 </li>
                                                                 <li>
-                                                                    <Link href="#">
+                                                                    <Link legacyBehavior  href="#">
                                                                         <a
                                                                             className="fb"
                                                                             title="Share on Facebook"
@@ -147,7 +142,7 @@ function Author() {
                                                                     </Link>
                                                                 </li>
                                                                 <li>
-                                                                    <Link href="#">
+                                                                    <Link legacyBehavior  href="#">
                                                                         <a
                                                                             className="tw"
                                                                             target="_blank"
@@ -158,7 +153,7 @@ function Author() {
                                                                     </Link>
                                                                 </li>
                                                                 <li>
-                                                                    <Link href="#">
+                                                                    <Link legacyBehavior  href="#">
                                                                         <a
                                                                             className="pt"
                                                                             target="_blank"
@@ -172,14 +167,14 @@ function Author() {
                                                         </div>
                                                         <div className="post-content p-30">
                                                             <div className="entry-meta meta-0 font-small mb-10">
-                                                                <Link href={`/blog/${item.id}`}>
+                                                                <Link legacyBehavior  href={`/blog/${item.id}`}>
                                                                     <a>
                                                                         <span className="post-cat text-info">
                                                                             {item.category}
                                                                         </span>
                                                                     </a>
                                                                 </Link>
-                                                                <Link href={`/blog/${item.id}`}>
+                                                                <Link legacyBehavior  href={`/blog/${item.id}`}>
                                                                     <a>
                                                                         <span className="post-cat text-success">
                                                                             {item.category}
@@ -189,7 +184,7 @@ function Author() {
                                                             </div>
                                                             <div className="d-flex post-card-content">
                                                                 <h5 className="post-title mb-20 font-weight-900">
-                                                                    <Link href={`/blog/${item.id}`}>
+                                                                    <Link legacyBehavior  href={`/blog/${item.id}`}>
                                                                         <a>
                                                                             {item.title}
                                                                         </a>
@@ -225,7 +220,7 @@ function Author() {
                                                                     className="img-hover-slide border-radius-5 position-relative"
                                                                     style={{ backgroundImage: `url(/assets/imgs/news/${item.img})` }}
                                                                 >
-                                                                    <Link href={`/blog/${item.id}`}>
+                                                                    <Link legacyBehavior  href={`/blog/${item.id}`}>
                                                                         <a
                                                                             className="img-link"
                                                                         ></a>
@@ -233,14 +228,14 @@ function Author() {
                                                                 </div>
                                                                 <ul className="social-share">
                                                                     <li>
-                                                                        <Link href="/#">
+                                                                        <Link legacyBehavior  href="/#">
                                                                             <a>
                                                                                 <i className="elegant-icon social_share"></i>
                                                                             </a>
                                                                         </Link>
                                                                     </li>
                                                                     <li>
-                                                                        <Link href="/#">
+                                                                        <Link legacyBehavior  href="/#">
                                                                             <a
                                                                                 className="fb"
                                                                                 title="Share on Facebook"
@@ -251,7 +246,7 @@ function Author() {
                                                                         </Link>
                                                                     </li>
                                                                     <li>
-                                                                        <Link href="/#">
+                                                                        <Link legacyBehavior  href="/#">
                                                                             <a
                                                                                 className="tw"
                                                                                 target="_blank"
@@ -262,7 +257,7 @@ function Author() {
                                                                         </Link>
                                                                     </li>
                                                                     <li>
-                                                                        <Link href="/#">
+                                                                        <Link legacyBehavior  href="/#">
                                                                             <a
                                                                                 className="pt"
                                                                                 target="_blank"
@@ -278,7 +273,7 @@ function Author() {
                                                         <div className="col-md-8 align-self-center">
                                                             <div className="post-content">
                                                                 <div className="entry-meta meta-0 font-small mb-10">
-                                                                    <Link href={`/blog/${item.id}`}>
+                                                                    <Link legacyBehavior  href={`/blog/${item.id}`}>
                                                                         <a>
                                                                             <span className="post-cat text-primary">
                                                                                 {item.category}
@@ -287,7 +282,7 @@ function Author() {
                                                                     </Link>
                                                                 </div>
                                                                 <h5 className="post-title font-weight-900 mb-20">
-                                                                    <Link href={`/blog/${item.id}`}>
+                                                                    <Link legacyBehavior  href={`/blog/${item.id}`}>
                                                                         <a>
                                                                             {item.title}
                                                                         </a>
@@ -318,7 +313,7 @@ function Author() {
                                     <nav aria-label="Page navigation example">
                                         <ul className="pagination justify-content-start">
                                             <li className="page-item">
-                                                <Link href="/#">
+                                                <Link legacyBehavior  href="/#">
                                                     <a
                                                         className="page-link"
 
@@ -328,7 +323,7 @@ function Author() {
                                                 </Link>
                                             </li>
                                             <li className="page-item active">
-                                                <Link href="/#">
+                                                <Link legacyBehavior  href="/#">
                                                     <a
                                                         className="page-link"
 
@@ -338,7 +333,7 @@ function Author() {
                                                 </Link>
                                             </li>
                                             <li className="page-item">
-                                                <Link href="/#">
+                                                <Link legacyBehavior  href="/#">
                                                     <a
                                                         className="page-link"
 
@@ -348,7 +343,7 @@ function Author() {
                                                 </Link>
                                             </li>
                                             <li className="page-item">
-                                                <Link href="/#">
+                                                <Link legacyBehavior  href="/#">
                                                     <a
                                                         className="page-link"
 
@@ -358,7 +353,7 @@ function Author() {
                                                 </Link>
                                             </li>
                                             <li className="page-item">
-                                                <Link href="/#">
+                                                <Link legacyBehavior  href="/#">
                                                     <a
                                                         className="page-link"
 
@@ -368,7 +363,7 @@ function Author() {
                                                 </Link>
                                             </li>
                                             <li className="page-item">
-                                                <Link href="/#">
+                                                <Link legacyBehavior  href="/#">
                                                     <a
                                                         className="page-link"
 
@@ -396,7 +391,7 @@ function Author() {
                                                         <div className="d-flex bg-white has-border p-25 hover-up transition-normal border-radius-5">
                                                             <div className="post-content media-body">
                                                                 <h6 className="post-title mb-15 text-limit-2-row font-medium">
-                                                                    <Link href={`/blog/${item.id}`}>
+                                                                    <Link legacyBehavior  href={`/blog/${item.id}`}>
                                                                         <a>
                                                                             {item.title}
                                                                         </a>
@@ -412,7 +407,7 @@ function Author() {
                                                                 </div>
                                                             </div>
                                                             <div className="post-thumb post-thumb-80 d-flex ml-15 border-radius-5 img-hover-scale overflow-hidden">
-                                                                <Link href={`/blog/${item.id}`}>
+                                                                <Link legacyBehavior  href={`/blog/${item.id}`}>
                                                                     <a
                                                                         className="color-white"
 
@@ -441,7 +436,7 @@ function Author() {
                                                 <li className="mb-30 wow fadeInUp animated">
                                                     <div className="d-flex bg-white has-border p-25 hover-up transition-normal border-radius-5">
                                                         <div className="post-thumb post-thumb-64 d-flex mr-15 border-radius-5 img-hover-scale overflow-hidden">
-                                                            <Link href="/single"><a
+                                                            <Link legacyBehavior  href="/single"><a
                                                                 className="color-white"
                                                             >
                                                                 <img
@@ -452,7 +447,7 @@ function Author() {
                                                         </div>
                                                         <div className="post-content media-body">
                                                             <p className="mb-10">
-                                                                <Link href="/author"><a>
+                                                                <Link legacyBehavior  href="/author"><a>
                                                                     <strong>
                                                                         David
                                                                     </strong>
@@ -474,7 +469,7 @@ function Author() {
                                                 <li className="mb-30 wow fadeInUp animated">
                                                     <div className="d-flex bg-white has-border p-25 hover-up transition-normal border-radius-5">
                                                         <div className="post-thumb post-thumb-64 d-flex mr-15 border-radius-5 img-hover-scale overflow-hidden">
-                                                            <Link href="/single"><a
+                                                            <Link legacyBehavior  href="/single"><a
                                                                 className="color-white"
                                                             >
                                                                 <img
@@ -485,7 +480,7 @@ function Author() {
                                                         </div>
                                                         <div className="post-content media-body">
                                                             <p className="mb-10">
-                                                                <Link href="/author"><a>
+                                                                <Link legacyBehavior  href="/author"><a>
                                                                     <strong>
                                                                         Kokawa
                                                                     </strong>
@@ -506,7 +501,7 @@ function Author() {
                                                 <li className="wow fadeInUp animated">
                                                     <div className="d-flex bg-white has-border p-25 hover-up transition-normal border-radius-5">
                                                         <div className="post-thumb post-thumb-64 d-flex mr-15 border-radius-5 img-hover-scale overflow-hidden">
-                                                            <Link href="/single"><a
+                                                            <Link legacyBehavior  href="/single"><a
                                                                 className="color-white"
                                                             >
                                                                 <img
@@ -517,7 +512,7 @@ function Author() {
                                                         </div>
                                                         <div className="post-content media-body">
                                                             <p className="mb-10">
-                                                                <Link href="/author"><a>
+                                                                <Link legacyBehavior  href="/author"><a>
                                                                     <strong>
                                                                         Tsukasi
                                                                     </strong>
