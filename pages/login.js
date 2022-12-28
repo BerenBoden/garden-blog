@@ -1,6 +1,33 @@
 import Link from "next/link";
+import {useState, useEffect} from 'react';
 import Layout from "./../components/layout/layout";
+import {signIn} from 'next-auth/react';
+import { useRouter } from "next/router";
+
 function Login() {
+    const [userInfo, setUserInfo] = useState({email: "", password: ""});
+    const router = useRouter();
+
+    useEffect(() => {
+        
+    }, []);
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        
+        console.log(userInfo.email, userInfo.password)
+
+        const result = await signIn('credentials', {
+            email: userInfo.email,
+            password: userInfo.password,
+            redirect: false
+        })
+        console.log(result)
+        if(result.status === 200){
+            router.push('/dashboard')
+        }
+    }
+
     return (
         <>
             <Layout>
@@ -15,13 +42,15 @@ function Login() {
                                                 Login
                                             </h3>
                                         </div>
-                                        <form method="post">
+                                        <form onSubmit={handleSubmit}>
                                             <div className="form-group">
                                                 <input
                                                     type="text"
                                                     required=""
                                                     className="form-control"
                                                     name="email"
+                                                    value={userInfo.email}
+                                                    onChange={({target}) => setUserInfo({...userInfo, email: target.value})}
                                                     placeholder="Your Email"
                                                 />
                                             </div>
@@ -29,6 +58,8 @@ function Login() {
                                                 <input
                                                     className="form-control"
                                                     required=""
+                                                    value={userInfo.password}
+                                                    onChange={({target}) => setUserInfo({...userInfo, password: target.value})}
                                                     type="password"
                                                     name="password"
                                                     placeholder="Password"
@@ -42,7 +73,6 @@ function Login() {
                                                             type="checkbox"
                                                             name="checkbox"
                                                             id="exampleCheckbox1"
-                                                            value=""
                                                         />
                                                         <label
                                                             className="form-check-label"
@@ -97,7 +127,6 @@ function Login() {
                                                     Sign up now
                                                 </a>
                                             </Link>
-
                                         </div>
                                     </div>
                                 </div>

@@ -1,10 +1,41 @@
-import Link from "next/link";
+import {useState, useEffect} from 'react';
+import Link from "next/link"
 import Layout from "./../components/layout/layout";
 import PostCarousel1 from "./../components/slider/PostCarousel1";
-import post from "../data/post.json";
+import Image from 'next/image'
 import author from "../data/author.json";
 import {process} from '../utils/slugify'
-function Home() {
+import axios from 'axios'
+
+export async function getServerSideProps() {
+    const result = await axios("https://strapi-production-15df.up.railway.app/api/blogs?fields=title&populate=image_header");
+    const posts = result.data.data.map((item, i) => ({
+      ...item.attributes,
+      image: `${result.data.data[i].attributes.image_header.data.attributes.formats.thumbnail.url.split('/uploads')[1]}`,
+    }));
+  
+    return {
+      props: {
+        posts,
+      },
+    };
+  }
+
+function Home({posts}) {
+    // const [posts, setPosts] = useState([]);
+
+    // useEffect(() => {
+    //   async function fetchData() {
+    //     const result = await axios("https://strapi-production-15df.up.railway.app/api/blogs?fields=title&populate=image_header");
+    //     const posts = result.data.data.map((item, i) => ({
+    //       ...item.attributes,
+    //       image: `${result.data.data[i].attributes.image_header.data.attributes.formats.thumbnail.url.split('/uploads')[1]}`,
+    //     }));
+    //     setPosts(posts);
+    //   }
+    //   fetchData();
+    // }, []);
+    // console.log(posts)
 
     return (
         <>
@@ -68,7 +99,7 @@ function Home() {
                                 <div className="col-lg-8 mb-30">
                                     <PostCarousel1 />
                                 </div>
-                                {post.slice(1, 5).map((item, i) => (
+                                {posts.slice(0, 2).map((item, i) => (
                                     <article
                                         className="col-lg-4 col-md-6 mb-30 wow fadeInUp animated"
                                         data-wow-delay="0.2s"
@@ -77,12 +108,11 @@ function Home() {
                                             <div
                                                 className="post-thumb thumb-overlay img-hover-slide position-relative"
                                                 style={{
-                                                    backgroundImage: `url(assets/imgs/news/${item.img})`
+                                                    backgroundImage: `url(https://strapi-production-15df.up.railway.app/uploads${item.image})`
                                                 }}
                                             >
                                                 <Link className="img-link" href={`/blog/${process(item.title)}`}>
-                                    
-                                                    <a href="#">Link</a>
+                                                    <a href="#"></a>
                                                 </Link>
                                                 <span className="top-right-icon bg-success">
                                                     <i className="elegant-icon icon_camera_alt"></i>
@@ -144,7 +174,7 @@ function Home() {
                                                     <h5 className="post-title mb-20 font-weight-900">
                                                         <Link href={`/blog/${process(item.title)}`}>
                                                             <a>
-                                                                1
+                                                                {item.title}
                                                             </a>
                                                         </Link>
                                                     </h5>
@@ -179,7 +209,7 @@ function Home() {
                                         </div>
                                         <div className="loop-list loop-list-style-1">
                                             <div className="row">
-                                                {post.slice(4, 8).map((item, i) => (
+                                                {posts.slice(0, 2).map((item, i) => (
                                                     <article
                                                         className="col-md-6 mb-30 wow fadeInUp animated"
                                                         data-wow-delay="0.2s"
@@ -188,7 +218,7 @@ function Home() {
                                                             <div
                                                                 className="post-thumb thumb-overlay img-hover-slide position-relative"
                                                                 style={{
-                                                                    backgroundImage: `url(assets/imgs/news/${item.img})`
+                                                                    backgroundImage: `url(https://strapi-production-15df.up.railway.app/uploads${item.image})`
                                                                 }}
                                                             >
                                                                 <Link href={`/blog/${process(item.title)}`}>
@@ -253,7 +283,7 @@ function Home() {
                                                                     <h5 className="post-title mb-20 font-weight-900">
                                                                         <Link href={`/blog/${process(item.title)}`}>
                                                                             <a>
-                                                                                4
+                                                                                {item.title}
                                                                             </a>
                                                                         </Link>
                                                                     </h5>
@@ -289,14 +319,15 @@ function Home() {
                                             </h5>
                                         </div>
                                         <div className="loop-list loop-list-style-1">
-                                            {post.slice(4, 8).map((item, i) => (
+                                            {posts.slice(0, 2).map((item, i) => (
                                                 <article className="hover-up-2 transition-normal wow fadeInUp animated">
+                                                    {console.log(`https://strapi-production-15df.up.railway.app/uploads${item.image}`)}
                                                     <div className="row mb-40 list-style-2">
                                                         <div className="col-md-4">
                                                             <div className="post-thumb position-relative border-radius-5">
                                                                 <div
                                                                     className="img-hover-slide border-radius-5 position-relative"
-                                                                    style={{ backgroundImage: `url(assets/imgs/news/${item.img})` }}
+                                                                    style={{ backgroundImage: `url(https://strapi-production-15df.up.railway.app/uploads${item.image})` }}
                                                                 >
                                                                     <Link href={`/blog/${process(item.title)}`}>
                                                                         <a
@@ -362,7 +393,7 @@ function Home() {
                                                                 <h5 className="post-title font-weight-900 mb-20">
                                                                     <Link href={`/blog/${process(item.title)}`}>
                                                                         <a>
-                                                                            3
+                                                                            {item.title}
                                                                         </a>
                                                                     </Link>
                                                                     <span className="post-format-icon">
@@ -386,72 +417,6 @@ function Home() {
                                                 </article>
                                             ))}
                                         </div>
-                                    </div>
-                                    <div className="pagination-area mb-30 wow fadeInUp animated">
-                                        <nav aria-label="Page navigation example">
-                                            <ul className="pagination justify-content-start">
-                                                <li className="page-item">
-                                                    <Link href="/#">
-                                                        <a
-                                                            className="page-link"
-
-                                                        >
-                                                            <i className="elegant-icon arrow_left"></i>
-                                                        </a>
-                                                    </Link>
-                                                </li>
-                                                <li className="page-item active">
-                                                    <Link href="/#">
-                                                        <a
-                                                            className="page-link"
-
-                                                        >
-                                                            01
-                                                        </a>
-                                                    </Link>
-                                                </li>
-                                                <li className="page-item">
-                                                    <Link href="/#">
-                                                        <a
-                                                            className="page-link"
-
-                                                        >
-                                                            02
-                                                        </a>
-                                                    </Link>
-                                                </li>
-                                                <li className="page-item">
-                                                    <Link href="/#">
-                                                        <a
-                                                            className="page-link"
-
-                                                        >
-                                                            03
-                                                        </a>
-                                                    </Link>
-                                                </li>
-                                                <li className="page-item">
-                                                    <Link href="/#">
-                                                        <a
-                                                            className="page-link"
-
-                                                        >
-                                                            04
-                                                        </a>
-                                                    </Link>
-                                                </li>
-                                                <li className="page-item">
-                                                    <Link href="/#">
-                                                        <a
-                                                            className="page-link"
-
-                                                        >
-                                                            <i className="elegant-icon arrow_right"></i>
-                                                        </a>
-                                                    </Link>
-                                                </li>
-                                            </ul>
-                                        </nav>
                                     </div>
                                 </div>
                                 <div className="col-lg-4">
@@ -517,14 +482,14 @@ function Home() {
                                             </div>
                                             <div className="post-block-list post-module-1">
                                                 <ul className="list-post">
-                                                    {post.slice(1, 5).map((item, i) => (
+                                                    {posts.slice(0, 2).map((item, i) => (
                                                         <li className="mb-30 wow fadeInUp animated">
                                                             <div className="d-flex bg-white has-border p-25 hover-up transition-normal border-radius-5">
                                                                 <div className="post-content media-body">
                                                                     <h6 className="post-title mb-15 text-limit-2-row font-medium">
                                                                         <Link href={`/blog/${process(item.title)}`}>
                                                                             <a>
-                                                                                2
+                                                                                {item.title}
                                                                             </a>
                                                                         </Link>
                                                                     </h6>
@@ -543,9 +508,11 @@ function Home() {
                                                                             className="color-white"
 
                                                                         >
-                                                                            <img
-                                                                                src={`/assets/imgs/news/${item.img}`}
-                                                                                alt=""
+                                                                            <Image
+                                                                                src={`https://strapi-production-15df.up.railway.app/uploads${item.image}`}
+                                                                                height={250}
+                                                                                width={250}
+                                                                                alt="post"
                                                                             />
                                                                         </a>
                                                                     </Link>
@@ -649,11 +616,12 @@ function Home() {
                                                                 <Link href="/single">
                                                                     <a
                                                                         className="color-white"
-
                                                                     >
-                                                                        <img
-                                                                            src="/assets/imgs/news/thumb-1.jpg"
-                                                                            alt=""
+                                                                        <Image
+                                                                            src={`/assets/imgs/authors/author-1.jpg`}
+                                                                            alt="post thumbnail"
+                                                                            height={250}
+                                                                            width={500}
                                                                         />
                                                                     </a>
                                                                 </Link>

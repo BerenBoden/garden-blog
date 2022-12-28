@@ -10,15 +10,12 @@ function CaregoryList() {
 
   useEffect(() => {
     async function fetchData() {
-      const result = await axios("http://localhost:1337/api/products?fields=title&populate=images");
-      setPosts(
-        result.data.data.map((item, i) => ({
-
-          ...item.attributes,
-          image:
-          `${result.data.data[i].attributes.images.data[i].attributes.formats.thumbnail.url.split('/uploads')[1]}`,
-        }))
-      );
+      const result = await axios("https://strapi-production-15df.up.railway.app/api/products?fields=title&populate=images");
+      const posts = result.data.data.map((item, i) => ({
+        ...item.attributes,
+        image: `${result.data.data[i].attributes.images.data.attributes.formats.thumbnail.url.split('/uploads')[1]}`,
+      }));
+      setPosts(posts);
     }
     fetchData();
   }, []);
@@ -46,7 +43,9 @@ function CaregoryList() {
                   <div className="post-module-3">
                     <div className="loop-list loop-list-style-1">
                       {posts.map((post, i) => (
+                        
                         <article className="hover-up-2 transition-normal wow fadeInUp animated">
+                        {console.log(post)}
                           <div className="row mb-40 list-style-2">
                             <div className="col-md-4">
                               <div className="post-thumb position-relative border-radius-5">
@@ -58,9 +57,9 @@ function CaregoryList() {
                                 >
                                   <Link href={`/blog/${process(post.title)}`}>
                                     <a className="img-link"><Image
-                                        height={500}
-                                        width={500}
-                                        src={`http://localhost:1337/uploads${post.image}`}
+                                        height={150}
+                                        width={400}
+                                        src={`https://strapi-production-15df.up.railway.app/uploads${post.image}`}
                                         alt="kk"
                                       /></a>
                                   </Link>
@@ -251,14 +250,14 @@ function CaregoryList() {
                                   </div>
                                 </div>
                                 <div className="post-thumb post-thumb-80 d-flex ml-15 border-radius-5 img-hover-scale overflow-hidden">
-                                {console.log(`http://localhost:1337/uploads${post.image}`)}
+                                {console.log(`https://strapi-production-15df.up.railway.app/uploads${post.image}`)}
                                   <Link href={`/blog/${""}`}>
                                     <a className="color-white">
                                 
                                       <Image
-                                        height={500}
-                                        width={500}
-                                        src={`http://localhost:1337/uploads${post.image}`}
+                                        height={100}
+                                        width={300}
+                                        src={`https://strapi-production-15df.up.railway.app/uploads${post.image}`}
                                         alt="kk"
                                       />
                                     </a>

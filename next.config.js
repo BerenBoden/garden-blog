@@ -1,11 +1,10 @@
 module.exports = {
   images: {
-    baseUrl: 'http://localhost:1337/uploads/',
     remotePatterns: [
       {
-        protocol: 'http',
-        hostname: 'localhost',
-        port: '1337',
+        protocol: 'https',
+        hostname: 'strapi-production-15df.up.railway.app',
+        port: '',
         pathname: '/uploads/**',
       },
     ],

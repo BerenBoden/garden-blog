@@ -2,6 +2,7 @@ import React from "react";
 React.useLayoutEffect = React.useEffect;
 import { useEffect } from "react";
 import { useRouter } from 'next/router'
+import { SessionProvider } from "next-auth/react"
 
 import 'react-perfect-scrollbar/dist/css/styles.css';
 import "slick-carousel/slick/slick.css";
@@ -11,7 +12,7 @@ import "../public/assets/css/widgets.css";
 import "../public/assets/css/responsive.css";
 import 'metismenujs/dist/metismenujs.css';
 
-function MyApp({ Component, pageProps }) {
+function MyApp({ Component, pageProps: {session, ...pageProps} }) {
     const router = useRouter()
 
     useEffect(() => {
@@ -29,14 +30,13 @@ function MyApp({ Component, pageProps }) {
                 itemSelector: ".grid-item",
                 columnWidth: ".grid-sizer"
             });
-        }    
+        }
         
         return () => {
             router.events.off('routeChangeError', handleRouteChangeError)
           }
     }, []);
-    return <Component {...pageProps} />;
-    
+    return (<SessionProvider session={session}><Component {...pageProps} /></SessionProvider>);
 }
 
 export default MyApp;

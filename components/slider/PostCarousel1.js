@@ -1,8 +1,25 @@
 import Link from "next/link";
 import React from "react";
 import Slider from "react-slick";
-import data from "../../data/post.json";
+import { useState, useEffect } from "react";
+import axios from "axios";
+
 const PostCarousel1 = () => {
+    const [posts, setPosts] = useState([]);
+
+    useEffect(() => {
+      async function fetchData() {
+        const result = await axios("https://strapi-production-15df.up.railway.app/api/blogs?fields=title&populate=image_header");
+        const posts = result.data.data.map((item, i) => ({
+          ...item.attributes,
+          image: `${result.data.data[i].attributes.image_header.data.attributes.formats.thumbnail.url.split('/uploads')[1]}`,
+        }));
+        setPosts(posts);
+      }
+      fetchData();
+    }, []);
+    console.log(posts)
+    
     const settings = {
         dots: true,
         infinite: true,
@@ -16,12 +33,12 @@ const PostCarousel1 = () => {
             <div className="carausel-post-1 hover-up overflow-hidden transition-normal position-relative wow fadeInUp animated">
                 <div className="arrow-cover"></div>
                 <Slider {...settings} className="slide-fade">
-                    {data.slice(4, 6).map((item, i) => (
+                    {posts.slice(0, 2).map((item, i) => (
                         <div className="position-relative post-thumb">
                             <div
                                 className="thumb-overlay img-hover-slide position-relative"
                                 style={{
-                                    backgroundImage: `url(/assets/imgs/news/${item.img})`
+                                    backgroundImage: `url(https://strapi-production-15df.up.railway.app/uploads${item.image})`
                                 }}
                             >
                                 {/* <Link href={`/blog/${item.id}`}>
