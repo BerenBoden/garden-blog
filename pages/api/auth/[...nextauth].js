@@ -5,6 +5,7 @@ const authOptions = {
     session: {
         strategy: 'jwt'
     },
+    secret: process.env.SECRET,
     providers: [
         CredentialsProvider({
             type: 'credentials',
