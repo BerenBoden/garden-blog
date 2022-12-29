@@ -9,7 +9,7 @@ export default async function handler(req, res) {
     try {
       // Get the name, email, and password from the request body
       const { username, name, email } = req.body;
-
+      console.log(process.env.DATABASE_URL, process.env.NEXTAUTH_URL)
       const password = await bcrypt.hash(req.body.password, 10).then(function (hash) {
         return hash
       });

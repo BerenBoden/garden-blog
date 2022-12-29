@@ -15,7 +15,7 @@ function Register() {
       password: userInfo.password,
       name: userInfo.name
     });
-  
+    console.log(process.env.DATABASE_URL, process.env.NEXTAUTH_URL)
     if (result.error) {
       console.error(result.error);
     } else {
