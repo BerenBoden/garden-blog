@@ -1,7 +1,6 @@
-import {useSession} from 'next-auth/react'
+import {useSession,signOut} from 'next-auth/react'
 import { useEffect } from 'react';
 import { useRouter } from 'next/router';
-import {signOut} from 'next-auth/react';
 
 function dashboard() {
   const router = useRouter();

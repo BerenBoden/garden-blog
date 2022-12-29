@@ -1,6 +1,29 @@
 import Link from "next/link";
 import Layout from "./../components/layout/layout";
+import axios from 'axios'
+import {useState} from 'react';
+
 function Register() {
+  const [userInfo, setUserInfo] = useState({username: "", email: "", password: "", name: ""});
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+  
+    const result = await axios.post('/api/register', {
+      username: userInfo.username,
+      email: userInfo.email,
+      password: userInfo.password,
+      name: userInfo.name
+    });
+  
+    if (result.error) {
+      console.error(result.error);
+    } else {
+      console.log('User registered successfully');
+    }
+  };
+
+
   return (
     <>
       <Layout>
@@ -15,9 +38,22 @@ function Register() {
                         Create an account
                       </h3>
                     </div>
-                    <form method="post">
+                    <form onSubmit={handleSubmit}>
+                    <div className="form-group">
+                        <input
+                          value={userInfo.name}
+                          onChange={({target}) => setUserInfo({...userInfo, name: target.value})}
+                          type="text"
+                          required=""
+                          className="form-control"
+                          name="name"
+                          placeholder="Full name"
+                        />
+                      </div>
                       <div className="form-group">
                         <input
+                          value={userInfo.username}
+                          onChange={({target}) => setUserInfo({...userInfo, username: target.value})}
                           type="text"
                           required=""
                           className="form-control"
@@ -27,6 +63,8 @@ function Register() {
                       </div>
                       <div className="form-group">
                         <input
+                          value={userInfo.email}
+                          onChange={({target}) => setUserInfo({...userInfo, email: target.value})}
                           type="text"
                           required=""
                           className="form-control"
@@ -36,6 +74,8 @@ function Register() {
                       </div>
                       <div className="form-group">
                         <input
+                          value={userInfo.password}
+                          onChange={({target}) => setUserInfo({...userInfo, password: target.value})}
                           className="form-control"
                           required=""
                           type="password"
@@ -102,7 +142,7 @@ function Register() {
                     </ul>
                     <div className="text-muted text-center">
                       Already have an account?{" "}
-                      <Link href="/page-login"><a href="#">Sign up now</a></Link>
+                      <Link href="/login"><a href="#">Log in now</a></Link>
                     </div>
                   </div>
                 </div>

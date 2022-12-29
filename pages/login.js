@@ -6,23 +6,16 @@ import { useRouter } from "next/router";
 
 function Login() {
     const [userInfo, setUserInfo] = useState({email: "", password: ""});
-    const router = useRouter();
 
-    useEffect(() => {
-        
-    }, []);
+    const router = useRouter();
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        
-        console.log(userInfo.email, userInfo.password)
-
         const result = await signIn('credentials', {
             email: userInfo.email,
             password: userInfo.password,
             redirect: false
         })
-        console.log(result)
         if(result.status === 200){
             router.push('/dashboard')
         }
@@ -122,7 +115,7 @@ function Login() {
                                         </ul>
                                         <div className="text-muted text-center">
                                             Don't Have an Account?{" "}
-                                            <Link href="/page-register">
+                                            <Link href="/register">
                                                 <a>
                                                     Sign up now
                                                 </a>
