@@ -1,7 +1,7 @@
 import React, { useState, useCallback } from "react";
 import TextEditor from "./TextEditor";
 import ImageUpload from "./ImageUpload";
-import circularJSON from 'circular-json';
+
 
 
 function CreatePost() {
@@ -19,7 +19,7 @@ function CreatePost() {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ title, content: circularJSON.stringify(content), image }),
+        body: JSON.stringify({ title, content: content, image }),
       });
       const blogPost = await response.json();
       console.log(blogPost);
