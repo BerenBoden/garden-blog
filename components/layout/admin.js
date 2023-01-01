@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Sidebar from "../admin/Sidebar";
 import Dashboard from "../admin/Dashboard";
 import Analytics from "../admin/Analytics";
-import Notifications from "../admin/notifications/Notifications";
+import Notifications from "../admin/Notifications/Notifications";
 import CreateUser from "../admin/CreateUser";
 import ViewUsers from "../admin/ViewUsers";
 import CreatePost from "../admin/Posts/CreatePost";
