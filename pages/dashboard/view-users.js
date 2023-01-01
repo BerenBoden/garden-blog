@@ -1,9 +1,9 @@
 import { useSession, signOut } from "next-auth/react";
 import { useEffect, useRef } from "react";
 import { useRouter } from "next/router";
-import AdminLayout from '../components/layout/admin';
+import AdminLayout from '../../components/layout/admin';
 
-function dashboard() {
+function viewUsers() {
   const router = useRouter();
   const { status, data } = useSession();
   useEffect(() => {
@@ -21,4 +21,4 @@ function dashboard() {
   return <div>Loading...</div>;
 }
 
-export default dashboard;
+export default viewUsers;

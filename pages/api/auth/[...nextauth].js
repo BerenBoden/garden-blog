@@ -20,8 +20,6 @@ const authOptions = {
       credentials: {},
       async authorize(credentials, req) {
         const { email, password } = credentials;
-        console.log(email, password);
-
         // Find the user with the matching email
         const user = await prisma.user.findUnique({
           where: {

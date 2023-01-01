@@ -4,6 +4,7 @@ import { useEffect } from "react";
 import { useRouter } from 'next/router'
 import { SessionProvider } from "next-auth/react"
 
+import "../public/assets/css/tailwind.css";
 import 'react-perfect-scrollbar/dist/css/styles.css';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -11,6 +12,7 @@ import "../public/assets/css/style.css";
 import "../public/assets/css/widgets.css";
 import "../public/assets/css/responsive.css";
 import 'metismenujs/dist/metismenujs.css';
+
 
 function MyApp({ Component, pageProps: {session, ...pageProps} }) {
     const router = useRouter()

@@ -1,0 +1,19 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.width-50{
+    width: 50%;
+}
+
+.width-35{
+    width: 35%;
+}
+
+.width-15{
+    width: 15%;
+}
+
+p {
+    margin: 0;
+}

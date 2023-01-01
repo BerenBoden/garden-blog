@@ -49,6 +49,13 @@ model User {
   sessions      Session[]
 }
 
+model Post {
+  id       String   @id @default(cuid())
+  title    String   @unique
+  content  String
+  image    String?
+}
+
 model VerificationToken {
   identifier String
   token      String   @unique
