@@ -1,11 +1,13 @@
 import Link from "next/link";
 import { useEffect, useLayoutEffect, useState } from "react";
+import { useRouter } from "next/router";
 import NavMenu from "./nav";
 
 const Menu = ({ addClass }) => {
     const [scroll, setScroll] = useState(0);
     const [isToggled, setToggled] = useState(false);
     const [size, setSize] = useState(0);
+    const router = useRouter();
 
     const toggleTrueFalse = () => setToggled(!isToggled);
     useEffect(() => {
@@ -31,15 +33,15 @@ const Menu = ({ addClass }) => {
                     <div className="main-nav float-left ">
                         <nav>
                             <ul className="main-menu d-none d-lg-inline font-small">
-                                <li className="">
+                                <li >
                                     <Link href="/">
                                         <a>
-                                            <i className="elegant-icon icon_house_alt mr-5"></i>
+                                            <i className="elegant-icon icon_house_alt mr-5 "></i>
                                             Home
                                         </a>
                                     </Link>
                                 </li>
-                                <li className="current-item has-mega-menu">
+                                <li className={router.pathname === '/articles' ? 'current-item has-mega-menu' : 'has-mega-menu'}>
                                     <Link href="/articles">
                                         <a>Articles</a>
                                     </Link>
@@ -194,18 +196,18 @@ const Menu = ({ addClass }) => {
                                         </li>
                                     </ul>
                                 </li>
-                                <li>
+                                <li className={router.pathname === '/shop' ? 'current-item has-mega-menu' : 'has-mega-menu'}>
                                     <Link href="/shop">
                                         <a>Shop</a>
                                     </Link>
                                 </li>
-                                <li>
+                                <li className={router.pathname === '/courses' ? 'current-item' : ''}>
                                     <Link href="/courses">
                                         <a>Courses</a>
                                     </Link>
                                 </li>
-                                <li>
-                                    <Link href="/contact">
+                                <li className={router.pathname === '/about' ? 'current-item' : ''}>
+                                    <Link href="/about">
                                         <a>About</a>
                                     </Link>
                                 </li>

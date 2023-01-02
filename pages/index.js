@@ -33,6 +33,7 @@ export async function getServerSideProps() {
 }
 
 function Home({ posts }) {
+
   return (
     <>
       <Layout>

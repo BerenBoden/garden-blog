@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useRouter } from "next/router";
 import { process } from "../utils/slugify";
 import axios from "axios";
@@ -8,13 +8,15 @@ import Layout from "./../components/layout/layout";
 
 function CaregoryList({ posts }) {
   const [currentPage, setCurrentPage] = useState(1);
-  const postsPerPage = 10;
+  const postsPerPage = 6;
   const pageNumbers = [];
+  const router = useRouter();
 
   const handlePageChange = (pageNumber) => {
+    if(pageNumber <= 0 || pageNumber > pageNumbers.length ) return
     setCurrentPage(pageNumber);
     router.push({
-      pathname: '/articles',
+      pathname: "/articles",
       query: { page: pageNumber },
     });
   };
@@ -26,9 +28,9 @@ function CaregoryList({ posts }) {
   const renderPageNumbers = pageNumbers.map((number) => {
     return (
       <li key={number} className="page-item">
-        <Link href={`/articles?page=${number}`}>
+        <div onClick={() =>handlePageChange(number)}>
           <a className="page-link">{number}</a>
-        </Link>
+        </div>
       </li>
     );
   });
@@ -36,7 +38,7 @@ function CaregoryList({ posts }) {
   const indexOfLastPost = currentPage * postsPerPage;
   const indexOfFirstPost = indexOfLastPost - postsPerPage;
   const currentPosts = posts.slice(indexOfFirstPost, indexOfLastPost);
-
+  
   const renderPosts = currentPosts.map((post) => {
     return (
       <article className="hover-up-2 transition-normal wow fadeInUp animated">
@@ -50,7 +52,7 @@ function CaregoryList({ posts }) {
                   backgroundImage: `url(assets/imgs/news/${""})`,
                 }}
               >
-                <Link href={`/blog/${process(post.title)}`}>
+                <Link href={`/articles/${process(post.title)}`}>
                   <a className="img-link">
                     <Image
                       height={150}
@@ -103,7 +105,7 @@ function CaregoryList({ posts }) {
                 </Link>
               </div>
               <h5 className="post-title font-weight-900 mb-20">
-                <Link href={`/blog/${process(post.title)}`}>
+                <Link href={`/articles/${process(post.title)}`}>
                   <a>{post.description}</a>
                 </Link>
                 <span className="post-format-icon">
@@ -128,12 +130,14 @@ function CaregoryList({ posts }) {
         <main>
           <div className="archive-header pt-50">
             <div className="container">
-              <h2 className="font-weight-900">Healthy</h2>
+              <h2 className="font-weight-900">
+                {router.pathname === "/articles" && "Articles"}
+              </h2>
               <div className="breadcrumb">
                 <Link href="/">
                   <a rel="nofollow">Home</a>
                 </Link>
-                <span></span> Healthy
+                <span></span> {router.pathname === "/articles" && "Articles"}
               </div>
               <div className="bt-1 border-color-1 mt-30 mb-50"></div>
             </div>
@@ -142,37 +146,40 @@ function CaregoryList({ posts }) {
             <div className="container">
               <div className="row">
                 <div className="col-lg-8">
-                  <div className="post-module-3">
-                    <div className="loop-list loop-list-style-1">
-                      {/* {posts.map((post, i) => (
-                        
-                        
-                      ))} */}
-                    </div>
-                  </div>
+                  
                   <div>
+                    {renderPosts}
                     <div className="pagination-area mb-30 wow fadeInUp animated">
                       <nav aria-label="Page navigation example">
                         <ul className="pagination justify-content-start">
                           <li className="page-item">
-                            <Link href={`/articles?page=${currentPage - 1}`}>
-                              <a className="page-link">
+                          <div>
+                              <a
+                                className="page-link"
+                                onClick={() =>
+                                  handlePageChange(currentPage - 1)
+                                }
+                              >
                                 <i className="elegant-icon arrow_left"></i>
                               </a>
-                            </Link>
+                            </div>
                           </li>
                           {renderPageNumbers}
                           <li className="page-item">
-                            <Link href={`/articles?page=${currentPage + 1}`}>
-                              <a className="page-link">
+                            <div>
+                              <a
+                                className="page-link"
+                                onClick={() =>
+                                  handlePageChange(currentPage + 1)
+                                }
+                              >
                                 <i className="elegant-icon arrow_right"></i>
                               </a>
-                            </Link>
+                            </div>
                           </li>
                         </ul>
                       </nav>
                     </div>
-                    {renderPosts}
                   </div>
                 </div>
                 <div className="col-lg-4">
@@ -226,7 +233,7 @@ function CaregoryList({ posts }) {
                               <div className="d-flex bg-white has-border p-25 hover-up transition-normal border-radius-5">
                                 <div className="post-content media-body">
                                   <h6 className="post-title mb-15 text-limit-2-row font-medium">
-                                    <Link href={`/blog/${process(post.title)}`}>
+                                    <Link href={`/articles/${process(post.title)}`}>
                                       <a>{post.title}</a>
                                     </Link>
                                   </h6>
@@ -238,10 +245,7 @@ function CaregoryList({ posts }) {
                                   </div>
                                 </div>
                                 <div className="post-thumb post-thumb-80 d-flex ml-15 border-radius-5 img-hover-scale overflow-hidden">
-                                  {console.log(
-                                    `https://strapi-production-15df.up.railway.app/uploads${post.image}`
-                                  )}
-                                  <Link href={`/blog/${""}`}>
+                                  <Link href={`/articles/${""}`}>
                                     <a className="color-white">
                                       <Image
                                         height={100}
@@ -382,10 +386,9 @@ function CaregoryList({ posts }) {
 }
 export default CaregoryList;
 
-export async function getServerSideProps(context) {
-  const page = context.query.page || 1;
+export async function getServerSideProps() {
   const result = await axios(
-    `https://strapi-production-15df.up.railway.app/api/blogs?page=${page}&pagination=10&fields=title&populate=image_header`
+    `https://strapi-production-15df.up.railway.app/api/blogs?&fields=title&populate=image_header`
   );
   const posts = result.data.data.map((item, i) => ({
     ...item.attributes,

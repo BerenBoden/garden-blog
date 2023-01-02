@@ -1,5 +1,5 @@
 import Layout from "./../components/layout/layout";
-function Contact() {
+function About() {
     return (
         <>
             <Layout>
@@ -138,4 +138,4 @@ function Contact() {
         </>
     );
 }
-export default Contact;
+export default About;

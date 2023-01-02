@@ -18,7 +18,6 @@ const PostCarousel1 = () => {
       }
       fetchData();
     }, []);
-    console.log(posts)
     
     const settings = {
         dots: true,
@@ -41,11 +40,7 @@ const PostCarousel1 = () => {
                                     backgroundImage: `url(https://strapi-production-15df.up.railway.app/uploads${item.image})`
                                 }}
                             >
-                                {/* <Link href={`/blog/${item.id}`}>
-                                    <a
-                                        className="img-link"
-                                    ></a>
-                                </Link> */}
+
                                 <div className="post-content-overlay text-white ml-30 mr-30 pb-30">
                                     <div className="entry-meta meta-0 font-small mb-20">
                                         <Link href={`/category/${item.category}`}>

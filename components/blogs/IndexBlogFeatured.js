@@ -3,7 +3,7 @@ import {process} from '../../utils/slugify'
 
 function IndexBlogFeatured({posts}) {
   return (
-    <>{posts.slice(0, 2).map((item, i) => (
+    <>{posts.slice(0, 4).map((item, i) => (
         <article
           className="col-md-6 mb-30 wow fadeInUp animated"
           data-wow-delay="0.2s"
@@ -15,7 +15,7 @@ function IndexBlogFeatured({posts}) {
                 backgroundImage: `url(https://strapi-production-15df.up.railway.app/uploads${item.image})`,
               }}
             >
-              <Link href={`/blog/${process(item.title)}`}>
+              <Link href={`/articles/${process(item.title)}`}>
                 <a className="img-link"></a>
               </Link>
               <ul className="social-share">
@@ -73,7 +73,7 @@ function IndexBlogFeatured({posts}) {
               </div>
               <div className="d-flex post-card-content">
                 <h5 className="post-title mb-20 font-weight-900">
-                  <Link href={`/blog/${process(item.title)}`}>
+                  <Link href={`/articles/${process(item.title)}`}>
                     <a>{item.title}</a>
                   </Link>
                 </h5>
