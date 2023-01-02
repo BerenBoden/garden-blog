@@ -2,8 +2,6 @@ import React, { useState, useCallback } from "react";
 import TextEditor from "./TextEditor";
 import ImageUpload from "./ImageUpload";
 
-
-
 function CreatePost() {
   const [content, setContent] = useState("");
   const [image, setImage] = useState(null);

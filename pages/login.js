@@ -6,6 +6,7 @@ import { useRouter } from "next/router";
 
 function Login() {
     const [userInfo, setUserInfo] = useState({email: "", password: ""});
+    const [result, setResult] = useState();
 
     const router = useRouter();
 
@@ -16,6 +17,7 @@ function Login() {
             password: userInfo.password,
             redirect: false
         })
+        setResult(result)
         if(result.status === 200){
             router.push('/dashboard')
         }
@@ -37,11 +39,13 @@ function Login() {
                                         </div>
                                         <form onSubmit={handleSubmit}>
                                             <div className="form-group">
+                                                {result?.error && <label className="text-red-500">{result.error}</label>}
                                                 <input
                                                     type="text"
                                                     required=""
                                                     className="form-control"
                                                     name="email"
+                                                    style={{borderColor: result?.error ? "rgb(239,68,68)" : ""}}
                                                     value={userInfo.email}
                                                     onChange={({target}) => setUserInfo({...userInfo, email: target.value})}
                                                     placeholder="Your Email"
@@ -51,6 +55,7 @@ function Login() {
                                                 <input
                                                     className="form-control"
                                                     required=""
+                                                    style={{borderColor: result?.error ? "rgb(239,68,68)" : ""}}
                                                     value={userInfo.password}
                                                     onChange={({target}) => setUserInfo({...userInfo, password: target.value})}
                                                     type="password"

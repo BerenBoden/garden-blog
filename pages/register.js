@@ -1,29 +1,33 @@
 import Link from "next/link";
 import Layout from "./../components/layout/layout";
-import axios from 'axios'
-import {useState} from 'react';
+import axios from "axios";
+import { useState } from "react";
 
 function Register() {
-  const [userInfo, setUserInfo] = useState({username: "", email: "", password: "", name: ""});
+  const [userInfo, setUserInfo] = useState({
+    username: "",
+    email: "",
+    password: "",
+    name: "",
+  });
+  const [result, setResult] = useState({});
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-  
-    const result = await axios.post('/api/register', {
-      username: userInfo.username,
-      email: userInfo.email,
-      password: userInfo.password,
-      name: userInfo.name
-    });
-    console.log(process.env.DATABASE_URL, process.env.NEXTAUTH_URL)
-    if (result.error) {
-      console.error(result.error);
-    } else {
-      console.log('User registered successfully');
+
+    try {
+      await axios.post("/api/register", {
+        username: userInfo.username,
+        email: userInfo.email,
+        password: userInfo.password,
+        name: userInfo.name,
+      });
+    } catch (error) {
+      if (error.response && error.response.status === 400) {
+        setResult(error.response.data.error);
+      }
     }
   };
-
-
   return (
     <>
       <Layout>
@@ -39,43 +43,57 @@ function Register() {
                       </h3>
                     </div>
                     <form onSubmit={handleSubmit}>
-                    <div className="form-group">
+                      <div className="form-group">
+                        {result.name && <label className="text-red-500">{result.name}</label>}
                         <input
                           value={userInfo.name}
-                          onChange={({target}) => setUserInfo({...userInfo, name: target.value})}
+                          className="form-control"
+                          style={{ borderColor: result.name ? "rgb(239,68,68)" : "" }}
+                          onChange={({ target }) =>
+                            setUserInfo({ ...userInfo, name: target.value })
+                          }
                           type="text"
                           required=""
-                          className="form-control"
                           name="name"
                           placeholder="Full name"
                         />
                       </div>
                       <div className="form-group">
+                        {result.username && <label className="text-red-500">{result.username}</label>}
                         <input
-                          value={userInfo.username}
-                          onChange={({target}) => setUserInfo({...userInfo, username: target.value})}
-                          type="text"
-                          required=""
                           className="form-control"
+                          style={{ borderColor: result.username ? "rgb(239,68,68)" : "" }}
+                          value={userInfo.username}
+                          onChange={({ target }) =>
+                            setUserInfo({ ...userInfo, username: target.value })
+                          }
+                          type="text"
                           name="username"
                           placeholder="Username"
                         />
                       </div>
-                      <div className="form-group">
+                      <div className="form-group ">
+                        {result.email && <label className="text-red-500">{result.email}</label>}
                         <input
                           value={userInfo.email}
-                          onChange={({target}) => setUserInfo({...userInfo, email: target.value})}
+                          onChange={({ target }) =>
+                            setUserInfo({ ...userInfo, email: target.value })
+                          }
                           type="text"
                           required=""
+                          style={{ borderColor: result.email ? "rgb(239,68,68)" : "" }}
                           className="form-control"
                           name="email"
                           placeholder="Email"
                         />
                       </div>
                       <div className="form-group">
+                      {result.password && <label className="text-red-500">{result.password}</label>}
                         <input
-                          value={userInfo.password}
-                          onChange={({target}) => setUserInfo({...userInfo, password: target.value})}
+                          onChange={({ target }) =>
+                            setUserInfo({ ...userInfo, password: target.value })
+                          }
+                          style={{ borderColor: result.password ? "rgb(239,68,68)" : "" }}
                           className="form-control"
                           required=""
                           type="password"
@@ -84,9 +102,11 @@ function Register() {
                         />
                       </div>
                       <div className="form-group">
+                      {result.password2 && <label className="text-red-500">{result.password2}</label>}
                         <input
                           className="form-control"
                           required=""
+                          style={{ borderColor: result.password2 ? "rgb(239,68,68)" : "" }}
                           type="password"
                           name="password"
                           placeholder="Confirm password"
@@ -142,7 +162,9 @@ function Register() {
                     </ul>
                     <div className="text-muted text-center">
                       Already have an account?{" "}
-                      <Link href="/login"><a href="#">Log in now</a></Link>
+                      <Link href="/login">
+                        <a href="#">Log in now</a>
+                      </Link>
                     </div>
                   </div>
                 </div>

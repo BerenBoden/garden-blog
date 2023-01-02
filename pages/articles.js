@@ -1,24 +1,126 @@
 import Link from "next/link";
 import Image from "next/image";
 import { useState, useEffect } from "react";
+import { useRouter } from "next/router";
 import { process } from "../utils/slugify";
 import axios from "axios";
 import Layout from "./../components/layout/layout";
 
-function CaregoryList() {
-  const [posts, setPosts] = useState([]);
+function CaregoryList({ posts }) {
+  const [currentPage, setCurrentPage] = useState(1);
+  const postsPerPage = 10;
+  const pageNumbers = [];
 
-  useEffect(() => {
-    async function fetchData() {
-      const result = await axios("https://strapi-production-15df.up.railway.app/api/products?fields=title&populate=images");
-      const posts = result.data.data.map((item, i) => ({
-        ...item.attributes,
-        image: `${result.data.data[i].attributes.images.data.attributes.formats.thumbnail.url.split('/uploads')[1]}`,
-      }));
-      setPosts(posts);
-    }
-    fetchData();
-  }, []);
+  const handlePageChange = (pageNumber) => {
+    setCurrentPage(pageNumber);
+    router.push({
+      pathname: '/articles',
+      query: { page: pageNumber },
+    });
+  };
+
+  for (let i = 1; i <= Math.ceil(posts.length / postsPerPage); i++) {
+    pageNumbers.push(i);
+  }
+
+  const renderPageNumbers = pageNumbers.map((number) => {
+    return (
+      <li key={number} className="page-item">
+        <Link href={`/articles?page=${number}`}>
+          <a className="page-link">{number}</a>
+        </Link>
+      </li>
+    );
+  });
+
+  const indexOfLastPost = currentPage * postsPerPage;
+  const indexOfFirstPost = indexOfLastPost - postsPerPage;
+  const currentPosts = posts.slice(indexOfFirstPost, indexOfLastPost);
+
+  const renderPosts = currentPosts.map((post) => {
+    return (
+      <article className="hover-up-2 transition-normal wow fadeInUp animated">
+        {console.log(post)}
+        <div className="row mb-40 list-style-2">
+          <div className="col-md-4">
+            <div className="post-thumb position-relative border-radius-5">
+              <div
+                className="img-hover-slide border-radius-5 position-relative"
+                style={{
+                  backgroundImage: `url(assets/imgs/news/${""})`,
+                }}
+              >
+                <Link href={`/blog/${process(post.title)}`}>
+                  <a className="img-link">
+                    <Image
+                      height={150}
+                      width={400}
+                      src={`https://strapi-production-15df.up.railway.app/uploads${post.image}`}
+                      alt="kk"
+                    />
+                  </a>
+                </Link>
+              </div>
+              <ul className="social-share">
+                <li>
+                  <Link href="/#">
+                    <a>
+                      <i className="elegant-icon social_share"></i>
+                    </a>
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/#">
+                    <a className="fb" title="Share on Facebook" target="_blank">
+                      <i className="elegant-icon social_facebook"></i>
+                    </a>
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/#">
+                    <a className="tw" target="_blank" title="Tweet now">
+                      <i className="elegant-icon social_twitter"></i>
+                    </a>
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/#">
+                    <a className="pt" target="_blank" title="Pin it">
+                      <i className="elegant-icon social_pinterest"></i>
+                    </a>
+                  </Link>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div className="col-md-8 align-self-center">
+            <div className="post-content">
+              <div className="entry-meta meta-0 font-small mb-10">
+                <Link href={`/category/${process(post.title)}`}>
+                  <a>
+                    <span className="post-cat text-primary">{post.title}</span>
+                  </a>
+                </Link>
+              </div>
+              <h5 className="post-title font-weight-900 mb-20">
+                <Link href={`/blog/${process(post.title)}`}>
+                  <a>{post.description}</a>
+                </Link>
+                <span className="post-format-icon">
+                  <i className="elegant-icon icon_star_alt"></i>
+                </span>
+              </h5>
+              <div className="entry-meta meta-1 float-left font-x-small text-uppercase">
+                <span className="post-on">{}</span>
+                <span className="time-reading has-dot">{"3"} mins read</span>
+                <span className="post-by has-dot">{"3"} views</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </article>
+    );
+  });
 
   return (
     <>
@@ -42,148 +144,35 @@ function CaregoryList() {
                 <div className="col-lg-8">
                   <div className="post-module-3">
                     <div className="loop-list loop-list-style-1">
-                      {posts.map((post, i) => (
+                      {/* {posts.map((post, i) => (
                         
-                        <article className="hover-up-2 transition-normal wow fadeInUp animated">
-                        {console.log(post)}
-                          <div className="row mb-40 list-style-2">
-                            <div className="col-md-4">
-                              <div className="post-thumb position-relative border-radius-5">
-                                <div
-                                  className="img-hover-slide border-radius-5 position-relative"
-                                  style={{
-                                    backgroundImage: `url(assets/imgs/news/${""})`,
-                                  }}
-                                >
-                                  <Link href={`/blog/${process(post.title)}`}>
-                                    <a className="img-link"><Image
-                                        height={150}
-                                        width={400}
-                                        src={`https://strapi-production-15df.up.railway.app/uploads${post.image}`}
-                                        alt="kk"
-                                      /></a>
-                                  </Link>
-                                </div>
-                                <ul className="social-share">
-                                  <li>
-                                    <Link href="/#">
-                                      <a>
-                                        <i className="elegant-icon social_share"></i>
-                                      </a>
-                                    </Link>
-                                  </li>
-                                  <li>
-                                    <Link href="/#">
-                                      <a
-                                        className="fb"
-                                        title="Share on Facebook"
-                                        target="_blank"
-                                      >
-                                        <i className="elegant-icon social_facebook"></i>
-                                      </a>
-                                    </Link>
-                                  </li>
-                                  <li>
-                                    <Link href="/#">
-                                      <a
-                                        className="tw"
-                                        target="_blank"
-                                        title="Tweet now"
-                                      >
-                                        <i className="elegant-icon social_twitter"></i>
-                                      </a>
-                                    </Link>
-                                  </li>
-                                  <li>
-                                    <Link href="/#">
-                                      <a
-                                        className="pt"
-                                        target="_blank"
-                                        title="Pin it"
-                                      >
-                                        <i className="elegant-icon social_pinterest"></i>
-                                      </a>
-                                    </Link>
-                                  </li>
-                                </ul>
-                              </div>
-                            </div>
-                            <div className="col-md-8 align-self-center">
-                              <div className="post-content">
-                                <div className="entry-meta meta-0 font-small mb-10">
-                                  <Link
-                                    href={`/category/${process(post.title)}`}
-                                  >
-                                    <a>
-                                      <span className="post-cat text-primary">
-                                        {post.title}
-                                      </span>
-                                    </a>
-                                  </Link>
-                                </div>
-                                <h5 className="post-title font-weight-900 mb-20">
-                                  <Link href={`/blog/${process(post.title)}`}>
-                                    <a>{post.description}</a>
-                                  </Link>
-                                  <span className="post-format-icon">
-                                    <i className="elegant-icon icon_star_alt"></i>
-                                  </span>
-                                </h5>
-                                <div className="entry-meta meta-1 float-left font-x-small text-uppercase">
-                                  <span className="post-on">{}</span>
-                                  <span className="time-reading has-dot">
-                                    {"3"} mins read
-                                  </span>
-                                  <span className="post-by has-dot">
-                                    {"3"} views
-                                  </span>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </article>
-                      ))}
+                        
+                      ))} */}
                     </div>
                   </div>
-                  <div className="pagination-area mb-30 wow fadeInUp animated">
-                    <nav aria-label="Page navigation example">
-                      <ul className="pagination justify-content-start">
-                        <li className="page-item">
-                          <Link href="/#">
-                            <a className="page-link">
-                              <i className="elegant-icon arrow_left"></i>
-                            </a>
-                          </Link>
-                        </li>
-                        <li className="page-item active">
-                          <Link href="/#">
-                            <a className="page-link">01</a>
-                          </Link>
-                        </li>
-                        <li className="page-item">
-                          <Link href="/#">
-                            <a className="page-link">02</a>
-                          </Link>
-                        </li>
-                        <li className="page-item">
-                          <Link href="/#">
-                            <a className="page-link">03</a>
-                          </Link>
-                        </li>
-                        <li className="page-item">
-                          <Link href="/#">
-                            <a className="page-link">04</a>
-                          </Link>
-                        </li>
-                        <li className="page-item">
-                          <Link href="/#">
-                            <a className="page-link">
-                              <i className="elegant-icon arrow_right"></i>
-                            </a>
-                          </Link>
-                        </li>
-                      </ul>
-                    </nav>
+                  <div>
+                    <div className="pagination-area mb-30 wow fadeInUp animated">
+                      <nav aria-label="Page navigation example">
+                        <ul className="pagination justify-content-start">
+                          <li className="page-item">
+                            <Link href={`/articles?page=${currentPage - 1}`}>
+                              <a className="page-link">
+                                <i className="elegant-icon arrow_left"></i>
+                              </a>
+                            </Link>
+                          </li>
+                          {renderPageNumbers}
+                          <li className="page-item">
+                            <Link href={`/articles?page=${currentPage + 1}`}>
+                              <a className="page-link">
+                                <i className="elegant-icon arrow_right"></i>
+                              </a>
+                            </Link>
+                          </li>
+                        </ul>
+                      </nav>
+                    </div>
+                    {renderPosts}
                   </div>
                 </div>
                 <div className="col-lg-4">
@@ -233,7 +222,6 @@ function CaregoryList() {
                       <div className="post-block-list post-module-1">
                         <ul className="list-post">
                           {posts.slice(0, 3).map((post, i) => (
-                            
                             <li className="mb-30 wow fadeInUp animated">
                               <div className="d-flex bg-white has-border p-25 hover-up transition-normal border-radius-5">
                                 <div className="post-content media-body">
@@ -250,10 +238,11 @@ function CaregoryList() {
                                   </div>
                                 </div>
                                 <div className="post-thumb post-thumb-80 d-flex ml-15 border-radius-5 img-hover-scale overflow-hidden">
-                                {console.log(`https://strapi-production-15df.up.railway.app/uploads${post.image}`)}
+                                  {console.log(
+                                    `https://strapi-production-15df.up.railway.app/uploads${post.image}`
+                                  )}
                                   <Link href={`/blog/${""}`}>
                                     <a className="color-white">
-                                
                                       <Image
                                         height={100}
                                         width={300}
@@ -392,3 +381,26 @@ function CaregoryList() {
   );
 }
 export default CaregoryList;
+
+export async function getServerSideProps(context) {
+  const page = context.query.page || 1;
+  const result = await axios(
+    `https://strapi-production-15df.up.railway.app/api/blogs?page=${page}&pagination=10&fields=title&populate=image_header`
+  );
+  const posts = result.data.data.map((item, i) => ({
+    ...item.attributes,
+    image: `${
+      result.data.data[
+        i
+      ].attributes.image_header.data.attributes.formats.thumbnail.url.split(
+        "/uploads"
+      )[1]
+    }`,
+  }));
+
+  return {
+    props: {
+      posts,
+    },
+  };
+}

@@ -195,7 +195,7 @@ const Menu = ({ addClass }) => {
                                     </ul>
                                 </li>
                                 <li>
-                                    <Link href="/forum">
+                                    <Link href="/shop">
                                         <a>Shop</a>
                                     </Link>
                                 </li>

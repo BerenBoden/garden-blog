@@ -20,12 +20,16 @@ const authOptions = {
       credentials: {},
       async authorize(credentials, req) {
         const { email, password } = credentials;
+
         // Find the user with the matching email
         const user = await prisma.user.findUnique({
           where: {
             email,
           },
         });
+        if(!user) {
+          throw new Error("Invalid email or password.");
+        }
 
         // Check whether the provided password matches the hashed password in the database
         const isValidPassword = await bcrypt.compare(password, user.password);
