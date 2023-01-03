@@ -52,7 +52,7 @@ function CaregoryList({ posts }) {
                   backgroundImage: `url(assets/imgs/news/${""})`,
                 }}
               >
-                <Link href={`/articles/${process(post.title)}`}>
+                <Link prefetch={false} href={`/articles/${process(post.title)}`}>
                   <a className="img-link">
                     <Image
                       height={150}
@@ -105,7 +105,7 @@ function CaregoryList({ posts }) {
                 </Link>
               </div>
               <h5 className="post-title font-weight-900 mb-20">
-                <Link href={`/articles/${process(post.title)}`}>
+                <Link prefetch={false} href={`/articles/${process(post.title)}`}>
                   <a>{post.description}</a>
                 </Link>
                 <span className="post-format-icon">
@@ -192,7 +192,7 @@ function CaregoryList({ posts }) {
                       />
                       <h5 className="mb-20">Hello, I'm Steven</h5>
                       <p className="font-medium text-muted">
-                        Hi, I’m Stenven, a Florida native, who left my career in
+                        Hi, I’m SteNven, a Florida native, who left my career in
                         corporate wealth management six years ago to embark on a
                         summer of soul searching that would change the course of
                         my life forever.
@@ -245,7 +245,7 @@ function CaregoryList({ posts }) {
                                   </div>
                                 </div>
                                 <div className="post-thumb post-thumb-80 d-flex ml-15 border-radius-5 img-hover-scale overflow-hidden">
-                                  <Link href={`/articles/${""}`}>
+                                  <Link prefetch={false} href={`/articles/${""}`}>
                                     <a className="color-white">
                                       <Image
                                         height={100}

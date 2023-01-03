@@ -1,5 +1,6 @@
 import Link from "next/link";
 import BottomCarousel from "../slider/BottomCarousel";
+import Image from 'next/image'
 
 import data from "../../data/post.json";
 const Bottom = () => {
@@ -21,9 +22,11 @@ const Bottom = () => {
                                                     <div className="post-thumb post-thumb-80 d-flex mr-15 border-radius-5 img-hover-scale overflow-hidden">
                                                         <Link href={`/blog/${item.id}`}>
                                                             <a className="color-white">
-                                                                <img
+                                                                <Image
                                                                     src={`/assets/imgs/news/${item.img}`}
-                                                                    alt=""
+                                                                    width={250}
+                                                                    height={250}
+                                                                    alt="news"
                                                                 />
                                                             </a>
                                                         </Link>
@@ -68,9 +71,11 @@ const Bottom = () => {
                                                     <div className="post-thumb post-thumb-80 d-flex mr-15 border-radius-5 img-hover-scale overflow-hidden">
                                                         <Link href={`/blog/${item.id}`}>
                                                             <a className="color-white">
-                                                                <img
+                                                                <Image
                                                                     src={`/assets/imgs/news/${item.img}`}
-                                                                    alt=""
+                                                                    width={250}
+                                                                    height={250}
+                                                                    alt="news"
                                                                 />
                                                             </a>
                                                         </Link>
@@ -115,9 +120,11 @@ const Bottom = () => {
                                                     <div className="post-thumb post-thumb-80 d-flex mr-15 border-radius-5 img-hover-scale overflow-hidden">
                                                         <Link href={`/blog/${item.id}`}>
                                                             <a className="color-white">
-                                                                <img
+                                                                <Image
                                                                     src={`/assets/imgs/news/${item.img}`}
-                                                                    alt=""
+                                                                    width={250}
+                                                                    height={250}
+                                                                    alt="news"
                                                                 />
                                                             </a>
                                                         </Link>

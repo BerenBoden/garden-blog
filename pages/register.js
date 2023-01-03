@@ -1,7 +1,9 @@
 import Link from "next/link";
 import Layout from "./../components/layout/layout";
 import axios from "axios";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useRouter } from "next/router";
+import {signIn, useSession} from 'next-auth/react';
 
 function Register() {
   const [userInfo, setUserInfo] = useState({
@@ -10,7 +12,15 @@ function Register() {
     password: "",
     name: "",
   });
+  const router = useRouter();
   const [result, setResult] = useState({});
+  const { status, data } = useSession();
+  useEffect(() => {
+    if (status === 'authenticated') {
+      router.push('/dashboard');
+    }
+  }, [status]);
+
 
   const handleSubmit = async (e) => {
     e.preventDefault();

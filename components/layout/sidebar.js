@@ -1,6 +1,7 @@
 import Link from "next/link";
 import PerfectScrollbar from 'react-perfect-scrollbar';
 import Layout from "./layout";
+import Image from "next/image";
 import data from "../../data/post.json";
 const Sidebar = ({ removeClass }) => {
     return (
@@ -64,7 +65,7 @@ const Sidebar = ({ removeClass }) => {
                                                 <div className="post-thumb post-thumb-80 d-flex mr-15 border-radius-5 img-hover-scale overflow-hidden">
                                                     <Link href={`/blog/${item.id}`}>
                                                         <a className="color-white">
-                                                            <img src={`assets/imgs/news/${item.img}`} alt="" />
+                                                            <Image width={250} height={250} src={`/assets/imgs/news/${item.img}`} alt="news" />
                                                         </a>
                                                     </Link>
                                                 </div>
@@ -93,7 +94,7 @@ const Sidebar = ({ removeClass }) => {
 
                             <Link href="https://themeforest.net/user/alithemes/portfolio">
                                 <a target="_blank">
-                                    <img className="advertise-img border-radius-5" src="/assets/imgs/ads/ads-1.jpg" alt="" />
+                                    <Image width={200} height={200} className="advertise-img border-radius-5" src="/assets/imgs/ads/ads-1.jpg" alt="new" />
                                 </a>
                             </Link>
                         </div>

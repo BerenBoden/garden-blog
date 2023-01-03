@@ -1,12 +1,18 @@
 import Link from "next/link";
 import {useState, useEffect} from 'react';
 import Layout from "./../components/layout/layout";
-import {signIn} from 'next-auth/react';
+import {signIn, useSession} from 'next-auth/react';
 import { useRouter } from "next/router";
 
 function Login() {
     const [userInfo, setUserInfo] = useState({email: "", password: ""});
     const [result, setResult] = useState();
+    const { status, data } = useSession();
+    useEffect(() => {
+      if (status === 'authenticated') {
+        router.push('/dashboard');
+      }
+    }, [status]);
 
     const router = useRouter();
 

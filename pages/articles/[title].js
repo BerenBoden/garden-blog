@@ -5,9 +5,10 @@ import Layout from "../../components/layout/layout";
 import { process } from "../../utils/slugify";
 import axios from "axios";
 
+
 const SingleVendor = ({ posts, postData }) => {
-  const [data, setData] = useState(postData.data[0].attributes);
-  console.log(posts.data)
+  const [data, setData] = useState(postData.data);
+
   return (
     <>
       <Layout>
@@ -21,7 +22,7 @@ const SingleVendor = ({ posts, postData }) => {
                       <div className="single-content2">
                         <div className="entry-header entry-header-style-1 mb-50 pt-50">
                           <h1 className="entry-title mb-50 font-weight-900">
-                            {data.title}
+                            {data[0].attributes.title}
                           </h1>
                           <div className="row">
                             <div className="col-md-6">
@@ -40,7 +41,7 @@ const SingleVendor = ({ posts, postData }) => {
                                   <Link href="/author">
                                     <a>
                                       <span className="author-name font-weight-bold">
-                                        {data.author}
+                                        {data[0].attributes.author}
                                       </span>
                                     </a>
                                   </Link>
@@ -87,7 +88,7 @@ const SingleVendor = ({ posts, postData }) => {
                             </div>
                           </div>
                         </div>
-                        <article>{postData.data[0].attributes.content}</article>
+                        <article>{data[0].attributes.content}</article>
                       </div>
                     </div>
                     <div className="col-lg-4 primary-sidebar sticky-sidebar">
@@ -396,15 +397,14 @@ const SingleVendor = ({ posts, postData }) => {
 export default SingleVendor;
 
 export async function getServerSideProps(context) {
-  // Split the URL path by '/'
-  console.log(context.req.url)
+  
+  try {
   const pathParts = context.req.url.split('/');
+  const extractedPath = `${pathParts[5]}`;
   // Get the title from the last part of the path
-  const title = pathParts[pathParts.length - 1];
-
-
+  const title = pathParts[pathParts.length - 1].split('.')[0];
   const postData = await axios.get(
-    `https://strapi-production-15df.up.railway.app/api/blogs?filters[slug][$eqi]=blog-6`
+    `https://strapi-production-15df.up.railway.app/api/blogs?filters[slug][$eqi]=${title}`
   );
   const result = await axios(
     `https://strapi-production-15df.up.railway.app/api/blogs?&fields=title&populate=image_header`
@@ -426,4 +426,8 @@ export async function getServerSideProps(context) {
       posts
     },
   };
+  }catch(err){
+    console.log('error:', err);
+  }
+
 }
