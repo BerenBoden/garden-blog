@@ -67,7 +67,9 @@ function Home({ posts }) {
                   </form>
                 </div>
                 <div className="col-lg-4 h-25  d-none d-lg-block m-auto">
-                  <img
+                  <Image
+                    width={500}
+                    height={500}
                     src="/assets/imgs/authors/featured.png"
                     alt=""
                     href="#"

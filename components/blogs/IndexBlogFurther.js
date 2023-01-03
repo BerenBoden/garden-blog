@@ -3,7 +3,7 @@ import {process} from '../../utils/slugify'
 
 function IndexBlogFurther({posts}) {
   return (
-    <div>{posts.slice(0, 6).map((item, i) => (
+    <div>{posts.slice(0, 4).map((item, i) => (
         <article className="hover-up-2 transition-normal wow fadeInUp animated">
           {console.log(
             `https://strapi-production-15df.up.railway.app/uploads${item.image}`
