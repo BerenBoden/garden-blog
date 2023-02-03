@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Layout from "./../components/layout/layout";
-import PostCarousel1 from "./../components/slider/PostCarousel1";
+import PostCarousel from "./../components/slider/PostCarousel";
 import Image from "next/image";
 import author from "../data/author.json";
 import axios from "axios";
@@ -12,14 +12,14 @@ import Author from "../components/author/Author";
 
 export async function getServerSideProps() {
   const result = await axios(
-    "https://strapi-production-15df.up.railway.app/api/blogs?fields=title&populate=image_header"
+    "https://strapi-production-15df.up.railway.app/api/articles?fields=title&populate=image_header"
   );
   const posts = result.data.data.map((item, i) => ({
     ...item.attributes,
     image: `${
       result.data.data[
         i
-      ].attributes.image_header.data.attributes.formats.thumbnail.url.split(
+      ].attributes.image_header.data.attributes.formats.medium.url.split(
         "/uploads"
       )[1]
     }`,
@@ -91,7 +91,7 @@ function Home({ posts }) {
             <div className="loop-grid mb-30">
               <div className="row">
                 <div className="col-lg-8 mb-30">
-                  <PostCarousel1 />
+                  <PostCarousel posts={posts}/>
                 </div>
                 <IndexBlogShowcase posts={posts} />
               </div>

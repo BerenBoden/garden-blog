@@ -34,9 +34,8 @@ export default async function handler(req, res) {
       } else if (!validator.isLength(req.body.password, { min: 8 })) {
         errors.password = "Password must be at least 8 characters long.";
       }
-      if(req.body.password !== password2) {
-        errors.password2 = "Passwords do not match.";
-      }
+      console.log(req.body.password, password2)
+
       if (Object.keys(errors).length > 0) {
         return res.status(400).send({error: errors});
       }

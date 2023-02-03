@@ -1,7 +1,6 @@
 import { useSession, signOut } from "next-auth/react";
-import { useEffect, useRef } from "react";
+import { useEffect } from "react";
 import { useRouter } from "next/router";
-import AdminLayout from '../components/layout/admin';
 
 function dashboard() {
   const router = useRouter();
@@ -10,13 +9,15 @@ function dashboard() {
     if (status === "unauthenticated") router.push("/login");
   }, [status]);
 
-  if (status === "authenticated") {
-    return (
-      <div style={{background: "#F1F5F9"}} className="overflow-hidden bg-black">
-        <AdminLayout/>
-      </div>
-    );
-  }
+  useEffect(() => {
+    if (status === "authenticated") {
+      const encodedState = encodeURIComponent(JSON.stringify(data))
+      router.push({
+        pathname: 'http://localhost:3001/dashboard',
+        search: `?state=${encodedState}`,
+      })
+    }
+  }, [status]);
 
   return <div>Loading...</div>;
 }

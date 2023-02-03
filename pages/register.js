@@ -3,7 +3,7 @@ import Layout from "./../components/layout/layout";
 import axios from "axios";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
-import {signIn, useSession} from 'next-auth/react';
+import { signIn, useSession } from "next-auth/react";
 
 function Register() {
   const [userInfo, setUserInfo] = useState({
@@ -16,11 +16,10 @@ function Register() {
   const [result, setResult] = useState({});
   const { status, data } = useSession();
   useEffect(() => {
-    if (status === 'authenticated') {
-      router.push('/dashboard');
+    if (status === "authenticated") {
+      router.push("/dashboard");
     }
   }, [status]);
-
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -32,6 +31,23 @@ function Register() {
         password: userInfo.password,
         name: userInfo.name,
       });
+      axios
+        .post(
+          "https://strapi-production-15df.up.railway.app/api/auth/local/register",
+          {
+            username: userInfo.username,
+            email: userInfo.email,
+            password: userInfo.password,
+          }
+        )
+        .then((response) => {
+          // Handle success.
+          router.push("/dashboard");
+        })
+        .catch((error) => {
+          // Handle error.
+          console.log("An error occurred:", error.response);
+        });
     } catch (error) {
       if (error.response && error.response.status === 400) {
         setResult(error.response.data.error);
@@ -54,11 +70,15 @@ function Register() {
                     </div>
                     <form onSubmit={handleSubmit}>
                       <div className="form-group">
-                        {result.name && <label className="text-red-500">{result.name}</label>}
+                        {result.name && (
+                          <label className="text-red-500">{result.name}</label>
+                        )}
                         <input
                           value={userInfo.name}
                           className="form-control"
-                          style={{ borderColor: result.name ? "rgb(239,68,68)" : "" }}
+                          style={{
+                            borderColor: result.name ? "rgb(239,68,68)" : "",
+                          }}
                           onChange={({ target }) =>
                             setUserInfo({ ...userInfo, name: target.value })
                           }
@@ -69,10 +89,18 @@ function Register() {
                         />
                       </div>
                       <div className="form-group">
-                        {result.username && <label className="text-red-500">{result.username}</label>}
+                        {result.username && (
+                          <label className="text-red-500">
+                            {result.username}
+                          </label>
+                        )}
                         <input
                           className="form-control"
-                          style={{ borderColor: result.username ? "rgb(239,68,68)" : "" }}
+                          style={{
+                            borderColor: result.username
+                              ? "rgb(239,68,68)"
+                              : "",
+                          }}
                           value={userInfo.username}
                           onChange={({ target }) =>
                             setUserInfo({ ...userInfo, username: target.value })
@@ -83,7 +111,9 @@ function Register() {
                         />
                       </div>
                       <div className="form-group ">
-                        {result.email && <label className="text-red-500">{result.email}</label>}
+                        {result.email && (
+                          <label className="text-red-500">{result.email}</label>
+                        )}
                         <input
                           value={userInfo.email}
                           onChange={({ target }) =>
@@ -91,19 +121,29 @@ function Register() {
                           }
                           type="text"
                           required=""
-                          style={{ borderColor: result.email ? "rgb(239,68,68)" : "" }}
+                          style={{
+                            borderColor: result.email ? "rgb(239,68,68)" : "",
+                          }}
                           className="form-control"
                           name="email"
                           placeholder="Email"
                         />
                       </div>
                       <div className="form-group">
-                      {result.password && <label className="text-red-500">{result.password}</label>}
+                        {result.password && (
+                          <label className="text-red-500">
+                            {result.password}
+                          </label>
+                        )}
                         <input
                           onChange={({ target }) =>
                             setUserInfo({ ...userInfo, password: target.value })
                           }
-                          style={{ borderColor: result.password ? "rgb(239,68,68)" : "" }}
+                          style={{
+                            borderColor: result.password
+                              ? "rgb(239,68,68)"
+                              : "",
+                          }}
                           className="form-control"
                           required=""
                           type="password"
@@ -112,11 +152,19 @@ function Register() {
                         />
                       </div>
                       <div className="form-group">
-                      {result.password2 && <label className="text-red-500">{result.password2}</label>}
+                        {result.password2 && (
+                          <label className="text-red-500">
+                            {result.password2}
+                          </label>
+                        )}
                         <input
                           className="form-control"
                           required=""
-                          style={{ borderColor: result.password2 ? "rgb(239,68,68)" : "" }}
+                          style={{
+                            borderColor: result.password2
+                              ? "rgb(239,68,68)"
+                              : "",
+                          }}
                           type="password"
                           name="password"
                           placeholder="Confirm password"

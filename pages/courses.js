@@ -4,7 +4,9 @@ import Layout from "../components/layout/layout";
 function shop() {
   return (
     <>
-      <Layout></Layout>
+      <Layout>
+        
+      </Layout>
     </>
   );
 }

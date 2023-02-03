@@ -4,20 +4,7 @@ import Slider from "react-slick";
 import { useState, useEffect } from "react";
 import axios from "axios";
 
-const PostCarousel1 = () => {
-    const [posts, setPosts] = useState([]);
-
-    useEffect(() => {
-      async function fetchData() {
-        const result = await axios("https://strapi-production-15df.up.railway.app/api/blogs?fields=title&populate=image_header");
-        const posts = result.data.data.map((item, i) => ({
-          ...item.attributes,
-          image: `${result.data.data[i].attributes.image_header.data.attributes.formats.thumbnail.url.split('/uploads')[1]}`,
-        }));
-        setPosts(posts);
-      }
-      fetchData();
-    }, []);
+const PostCarousel = ({posts}) => {
     
     const settings = {
         dots: true,
@@ -76,5 +63,5 @@ const PostCarousel1 = () => {
     );
 };
 
-export default PostCarousel1;
+export default PostCarousel;
 
