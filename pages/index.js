@@ -1,5 +1,5 @@
 import Link from "next/link";
-import Layout from "./../components/layout/layout";
+import Layout from "../components/layout/layout";
 import PostCarousel from "./../components/slider/PostCarousel";
 import Image from "next/image";
 import author from "../data/author.json";
@@ -17,11 +17,11 @@ export async function getServerSideProps() {
   const posts = result.data.data.map((item, i) => ({
     ...item.attributes,
     image: `${
-      result.data.data[
-        i
-      ].attributes.image_header.data.attributes.formats.medium.url.split(
-        "/uploads"
-      )[1]
+      result.data.data[i].attributes.image_header.data.attributes.formats[
+        result.data.data[i].attributes.image_header.data.attributes.formats.hasOwnProperty('medium')
+          ? 'medium'
+          : 'small'
+      ].url.split("/uploads")[1]
     }`,
   }));
 
@@ -32,8 +32,8 @@ export async function getServerSideProps() {
   };
 }
 
-function Home({ posts }) {
-
+function Home({ posts}) {
+  
   return (
     <>
       <Layout>

@@ -6,8 +6,8 @@ import { useSession, signOut } from "next-auth/react";
 const Header = ({ addClass, openSearch }) => {
   const { status, data } = useSession();
   const isAuthenticated = status === "authenticated";
-    const linkHref = isAuthenticated ? "/dashboard" : "/login";
-    const linkText = isAuthenticated ? "Dashboard" : "Log in";
+  const linkHref = isAuthenticated ? "/dashboard" : "/login";
+  const linkText = isAuthenticated ? "Dashboard" : "Log in";
   return (
     <>
       <header className="main-header header-style-1 font-heading">
@@ -25,10 +25,10 @@ const Header = ({ addClass, openSearch }) => {
                 <ul className="list-inline nav-topbar d-none d-md-inline">
                   <li className="list-inline-item">
                     <Link href={linkHref}>
-                        <a className="d-non d-md-inline">
+                      <a className="d-non d-md-inline">
                         <i className="elegant-icon icon_account_alt mr-5"></i>
                         {linkText}
-                        </a>
+                      </a>
                     </Link>
                   </li>
                 </ul>
@@ -46,10 +46,23 @@ const Header = ({ addClass, openSearch }) => {
             </div>
           </div>
         </div>
-        <Menu addClass={addClass} />
+        <Menu />
       </header>
     </>
   );
 };
+
+export async function getStaticProps() {
+  const res = await fetch(
+    "http://localhost:5000/api/identifiers?start=0&limit=-1&content=article&identifier=categories"
+  );
+  const categories = await res.json();
+
+  return {
+    props: {
+      categories,
+    },
+  };
+}
 
 export default Header;

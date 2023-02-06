@@ -403,10 +403,10 @@ export async function getServerSideProps(context) {
   // Get the title from the last part of the path
   const title = pathParts[pathParts.length - 1].split('.')[0];
   const postData = await axios.get(
-    `https://strapi-production-15df.up.railway.app/api/blogs?filters[slug][$eqi]=${title}`
+    `https://strapi-production-15df.up.railway.app/api/articles?filters[slug][$eqi]=${title}`
   );
   const result = await axios.get(
-    `https://strapi-production-15df.up.railway.app/api/blogs?&fields=title&populate=image_header`
+    `https://strapi-production-15df.up.railway.app/api/articles?&fields=title&populate=image_header`
   );
   const posts = result.data.data.map((item, i) => ({
     ...item.attributes,

@@ -1,10 +1,12 @@
-import Link from "next/link"
-import {process} from '../../utils/slugify'
+import Link from "next/link";
+import { process } from "../../utils/slugify";
 
-function IndexBlogFurther({posts}) {
+function IndexBlogFurther({ posts }) {
   return (
-    <div>{posts.slice(0, 4).map((item, i) => (
-        <article className="hover-up-2 transition-normal wow fadeInUp animated">
+    <>
+      {posts.slice(0, 4).map((item, i) => (
+        <Link key={`${process(item.title)}`} href={`/articles/${process(item.title)}`}>
+        <article className="hover-up transition-normal wow fadeInUp animated cursor-pointer">
           {console.log(
             `https://strapi-production-15df.up.railway.app/uploads${item.image}`
           )}
@@ -17,7 +19,7 @@ function IndexBlogFurther({posts}) {
                     backgroundImage: `url(https://strapi-production-15df.up.railway.app/uploads${item.image})`,
                   }}
                 >
-                  <Link  href={`/articles/${process(item.title)}`}>
+                  <Link href={`/articles/${process(item.title)}`}>
                     <a className="img-link"></a>
                   </Link>
                 </div>
@@ -42,22 +44,14 @@ function IndexBlogFurther({posts}) {
                   </li>
                   <li>
                     <Link href="/#">
-                      <a
-                        className="tw"
-                        target="_blank"
-                        title="Tweet now"
-                      >
+                      <a className="tw" target="_blank" title="Tweet now">
                         <i className="elegant-icon social_twitter"></i>
                       </a>
                     </Link>
                   </li>
                   <li>
                     <Link href="/#">
-                      <a
-                        className="pt"
-                        target="_blank"
-                        title="Pin it"
-                      >
+                      <a className="pt" target="_blank" title="Pin it">
                         <i className="elegant-icon social_pinterest"></i>
                       </a>
                     </Link>
@@ -77,7 +71,7 @@ function IndexBlogFurther({posts}) {
                   </Link>
                 </div>
                 <h5 className="post-title font-weight-900 mb-20">
-                  <Link  href={`/articles/${process(item.title)}`}>
+                  <Link href={`/articles/${process(item.title)}`}>
                     <a>{item.title}</a>
                   </Link>
                   <span className="post-format-icon">
@@ -89,16 +83,16 @@ function IndexBlogFurther({posts}) {
                   <span className="time-reading has-dot">
                     {item.readTime} mins read
                   </span>
-                  <span className="post-by has-dot">
-                    {item.views} views
-                  </span>
+                  <span className="post-by has-dot">{item.views} views</span>
                 </div>
               </div>
             </div>
           </div>
         </article>
-      ))}</div>
-  )
+        </Link>
+      ))}
+    </>
+  );
 }
 
-export default IndexBlogFurther
+export default IndexBlogFurther;

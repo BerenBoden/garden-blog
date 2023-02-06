@@ -423,6 +423,11 @@ span.has-dot::before {
     background-position: center center;
     min-height: 280px;
     overflow: hidden;
+    transition: all 0.4s ease;
+    -webkit-transition: all 0.4s ease;
+    -moz-transition: all 0.4s ease;
+    -ms-transition: all 0.4s ease;
+    -o-transition: all 0.4s ease;
 }
 .post-thumb:hover .img-hover-slide {
     background-position: 30%;

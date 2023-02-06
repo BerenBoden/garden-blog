@@ -5,6 +5,7 @@ function Author({author}) {
     <>{author.slice(0, 1).map((item, i) => (
         <>
           <img
+            key={item.username}
             className="about-author-img mb-25"
             src={`/assets/imgs/authors/${item.img}`}
             alt=""

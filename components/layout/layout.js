@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import Bottom from "./bottom";
 import Search from "../elements/search";
 import Footer from "./footer";
@@ -32,9 +32,7 @@ const Layout = ({ children }) => {
             <Sidebar removeClass={removeClass} />
             <Header addClass={addClass} openSearch={openSearch} />
             <Search />
-
             {children}
-
             <Bottom />
             <Footer removeClass={removeClass} />
             <BackToTop />
@@ -42,4 +40,4 @@ const Layout = ({ children }) => {
     );
 };
 
-export default Layout;
+export default Layout

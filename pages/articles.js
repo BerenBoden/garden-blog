@@ -42,7 +42,6 @@ function CaregoryList({ posts }) {
   const renderPosts = currentPosts.map((post) => {
     return (
       <article className="hover-up-2 transition-normal wow fadeInUp animated">
-        {console.log(post)}
         <div className="row mb-40 list-style-2">
           <div className="col-md-4">
             <div className="post-thumb position-relative border-radius-5">
@@ -98,7 +97,7 @@ function CaregoryList({ posts }) {
           <div className="col-md-8 align-self-center">
             <div className="post-content">
               <div className="entry-meta meta-0 font-small mb-10">
-                <Link href={`/category/${process(post.title)}`}>
+                <Link href={`/articles/${process(post.title)}`}>
                   <a>
                     <span className="post-cat text-primary">{post.title}</span>
                   </a>
@@ -388,7 +387,7 @@ export default CaregoryList;
 
 export async function getServerSideProps() {
   const result = await axios(
-    `https://strapi-production-15df.up.railway.app/api/blogs?&fields=title&populate=image_header`
+    `https://strapi-production-15df.up.railway.app/api/articles?&fields=title&populate=image_header`
   );
   const posts = result.data.data.map((item, i) => ({
     ...item.attributes,

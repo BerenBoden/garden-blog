@@ -946,8 +946,7 @@ header .search-icon .ti-close,
   border: 1px solid #fafafa;
   -webkit-box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
-  display: flex;
-  justify-content: space-between;
+
 }
 .main-menu > li.current-item.has-mega-menu .mega-menu .sub-mega-menu {
   padding-right: 25px;

@@ -6,7 +6,7 @@ import data from "../../data/post.json";
 function CaregoryList() {
     const router = useRouter()    
     const { category } = router.query;
-    console.log(category);
+
     const [catList, setCatList] = useState([]);
     useEffect(() => {
         fetchProducts();
